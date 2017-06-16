@@ -15,12 +15,10 @@
  */
 @property (nonatomic , strong) UILabel * titleLabel;
 
-
 /**
  *@bref album photo count
  */
 @property (nonatomic , strong) UILabel * countLabel;
-
 
 /**
  *@bref album coverImage
@@ -43,7 +41,9 @@
 #pragma mark-
 #pragma mark- configureUIAppearance 
 - (void)configureUIAppearance {
-
+    [self.contentView addSubview:self.coverImageView];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.countLabel];
 
 }
 

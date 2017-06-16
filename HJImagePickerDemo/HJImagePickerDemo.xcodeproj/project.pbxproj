@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C4CF3F1D1EF366E900904F76 /* HJPhotoFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */; };
+		C4CF3F1E1EF3CCC600904F76 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FA49C61EF2304900489B3C /* Photos.framework */; };
 		C4FA499B1EF222B300489B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499A1EF222B300489B3C /* main.m */; };
 		C4FA499E1EF222B400489B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499D1EF222B400489B3C /* AppDelegate.m */; };
 		C4FA49A11EF222B400489B3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49A01EF222B400489B3C /* ViewController.m */; };
@@ -17,7 +18,6 @@
 		C4FA49B41EF222B500489B3C /* HJImagePickerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49B31EF222B500489B3C /* HJImagePickerDemoUITests.m */; };
 		C4FA49C21EF2283400489B3C /* HJImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49C11EF2283400489B3C /* HJImagePickerViewController.m */; };
 		C4FA49C41EF228AD00489B3C /* imagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4FA49C31EF228AD00489B3C /* imagePicker.xcassets */; };
-		C4FA49C71EF2304900489B3C /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FA49C61EF2304900489B3C /* Photos.framework */; };
 		C4FA49CA1EF2645A00489B3C /* HJAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49C91EF2645A00489B3C /* HJAlbumView.m */; };
 		C4FA49CD1EF2648F00489B3C /* HJGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49CC1EF2648F00489B3C /* HJGridView.m */; };
 		C4FA49D01EF2676500489B3C /* HJAlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49CF1EF2676500489B3C /* HJAlbumTableViewCell.m */; };
@@ -69,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4FA49C71EF2304900489B3C /* Photos.framework in Frameworks */,
+				C4CF3F1E1EF3CCC600904F76 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

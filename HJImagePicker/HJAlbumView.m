@@ -7,6 +7,8 @@
 //
 
 #import "HJAlbumView.h"
+#import "HJAlbumTableViewCell.h"
+
 
 @interface HJAlbumView ()
 
@@ -26,6 +28,7 @@
 #pragma mark- setter && getter
 - (UITableView *)tableView {
     if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
     }
     return _tableView;

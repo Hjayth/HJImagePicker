@@ -27,12 +27,17 @@
 }
 
 
-- (NSArray *)fetchPhotoCollections {
+- (NSArray<PHAssetCollection *> *)fetchAssetCollections {
+    PHFetchOptions * option = [[PHFetchOptions alloc] init];
+    PHFetchResult * result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:option];
 
-
-    
     return nil;
 }
 
+
+- (NSArray<PHAsset *> *)fetchPhotosWithAssetCollection:(PHAssetCollection *)assetCollection {
+    
+    return nil;
+}
 
 @end

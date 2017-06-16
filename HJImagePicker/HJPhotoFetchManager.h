@@ -9,8 +9,8 @@
  photo fetch manager
  */
 #import <Foundation/Foundation.h>
-
-
+@class PHAsset;
+@class PHAssetCollection;
 @interface HJPhotoFetchManager : NSObject
 
 /**
@@ -27,6 +27,14 @@
 
  @return photo ablum arr
  */
-- (NSArray *)fetchPhotoCollections;
+- (NSArray<PHAssetCollection *> *)fetchAssetCollections;
 
+
+/**
+ fetch the ablum photos asset
+
+ @param assetCollection asset collection
+ @return ablum photos asset
+ */
+- (NSArray<PHAsset *> *)fetchPhotosWithAssetCollection:(PHAssetCollection *)assetCollection;
 @end
