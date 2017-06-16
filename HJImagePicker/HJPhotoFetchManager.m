@@ -36,7 +36,8 @@
 
 
 - (NSArray<PHAsset *> *)fetchPhotosWithAssetCollection:(PHAssetCollection *)assetCollection {
-    
+    PHFetchOptions * option = [PHFetchOptions new];
+    PHFetchResult * result = [PHAsset fetchAssetsInAssetCollection:assetCollection options:option];
     return nil;
 }
 

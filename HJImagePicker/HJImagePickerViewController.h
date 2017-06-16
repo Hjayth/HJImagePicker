@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
-
+@class PHAsset;
 @class HJImagePickerViewController;
 @protocol HJImagePickerDelegate <NSObject>;
 
 - (void)imagePicker:(HJImagePickerViewController *)imagePicker
        selectImages:(NSArray *)imagesArr;
 
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectImageAssets:(NSArray <PHAsset *> *)imageAssets;
 
 @end
 

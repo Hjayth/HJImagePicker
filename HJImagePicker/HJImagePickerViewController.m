@@ -9,8 +9,21 @@
 #import "HJImagePickerViewController.h"
 #import "HJAlbumView.h"
 #import "HJGridView.h"
+#import "HJPhotoFetchManager.h"
 
 @interface HJImagePickerViewController ()
+
+/**
+ photo album  list view
+ */
+@property (nonatomic  , strong) HJAlbumView * albumView;
+
+
+/**
+ photo list view
+ */
+@property (nonatomic , strong) HJGridView * gridView;
+
 
 @end
 
@@ -33,9 +46,32 @@
 
 #pragma mark-
 #pragma mark- Private Methods
+- (void)pullDownViewShow:(BOOL)show {
+    if (show) {
+        
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.albumView cache:YES];
+        return;
+    }
+   
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.albumView cache:YES];
 
+}
 #pragma mark-
 #pragma mark- Getters && Setters
+- (HJGridView *)gridView {
+    if (!_gridView) {
+        
+    }
+    return _gridView;
+}
+
+- (HJAlbumView *)albumView {
+    if (!_albumView) {
+        
+    }
+    return _albumView;
+
+}
 
 #pragma mark-
 #pragma mark- SetupConstraints
