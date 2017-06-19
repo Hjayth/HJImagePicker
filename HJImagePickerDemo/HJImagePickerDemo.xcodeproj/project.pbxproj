@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A6A8E341EF8168300ABFBFB /* HJImagePickerBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */; };
+		2A6A8E381EF82F9700ABFBFB /* HJImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A6A8E371EF82F9700ABFBFB /* HJImagePicker.strings */; };
 		C4CF3F1D1EF366E900904F76 /* HJPhotoFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */; };
 		C4CF3F1E1EF3CCC600904F76 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FA49C61EF2304900489B3C /* Photos.framework */; };
 		C4CF3F211EF76A2500904F76 /* HJCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */; };
@@ -14,9 +16,7 @@
 		C4FA499B1EF222B300489B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499A1EF222B300489B3C /* main.m */; };
 		C4FA499E1EF222B400489B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499D1EF222B400489B3C /* AppDelegate.m */; };
 		C4FA49A11EF222B400489B3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49A01EF222B400489B3C /* ViewController.m */; };
-		C4FA49A41EF222B400489B3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4FA49A21EF222B400489B3C /* Main.storyboard */; };
 		C4FA49A61EF222B400489B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4FA49A51EF222B400489B3C /* Assets.xcassets */; };
-		C4FA49A91EF222B400489B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4FA49A71EF222B400489B3C /* LaunchScreen.storyboard */; };
 		C4FA49B41EF222B500489B3C /* HJImagePickerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49B31EF222B500489B3C /* HJImagePickerDemoUITests.m */; };
 		C4FA49C21EF2283400489B3C /* HJImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49C11EF2283400489B3C /* HJImagePickerViewController.m */; };
 		C4FA49C41EF228AD00489B3C /* imagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4FA49C31EF228AD00489B3C /* imagePicker.xcassets */; };
@@ -37,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A6A8E321EF8168300ABFBFB /* HJImagePickerBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJImagePickerBottomView.h; sourceTree = "<group>"; };
+		2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJImagePickerBottomView.m; sourceTree = "<group>"; };
+		2A6A8E371EF82F9700ABFBFB /* HJImagePicker.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = HJImagePicker.strings; sourceTree = "<group>"; };
 		C4CF3F1B1EF366E900904F76 /* HJPhotoFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJPhotoFetchManager.h; sourceTree = "<group>"; };
 		C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJPhotoFetchManager.m; sourceTree = "<group>"; };
 		C4CF3F1F1EF76A2500904F76 /* HJCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCollectionViewLayout.h; sourceTree = "<group>"; };
@@ -49,9 +52,7 @@
 		C4FA499D1EF222B400489B3C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C4FA499F1EF222B400489B3C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C4FA49A01EF222B400489B3C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		C4FA49A31EF222B400489B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4FA49A51EF222B400489B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C4FA49A81EF222B400489B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4FA49AA1EF222B400489B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4FA49AF1EF222B500489B3C /* HJImagePickerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HJImagePickerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FA49B31EF222B500489B3C /* HJImagePickerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJImagePickerDemoUITests.m; sourceTree = "<group>"; };
@@ -116,9 +117,7 @@
 				C4FA499D1EF222B400489B3C /* AppDelegate.m */,
 				C4FA499F1EF222B400489B3C /* ViewController.h */,
 				C4FA49A01EF222B400489B3C /* ViewController.m */,
-				C4FA49A21EF222B400489B3C /* Main.storyboard */,
 				C4FA49A51EF222B400489B3C /* Assets.xcassets */,
-				C4FA49A71EF222B400489B3C /* LaunchScreen.storyboard */,
 				C4FA49AA1EF222B400489B3C /* Info.plist */,
 				C4FA49991EF222B300489B3C /* Supporting Files */,
 			);
@@ -162,6 +161,9 @@
 				C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */,
 				C4CF3F221EF77E3000904F76 /* HJNavigationView.h */,
 				C4CF3F231EF77E3000904F76 /* HJNavigationView.m */,
+				2A6A8E321EF8168300ABFBFB /* HJImagePickerBottomView.h */,
+				2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */,
+				2A6A8E371EF82F9700ABFBFB /* HJImagePicker.strings */,
 			);
 			name = HJImagePicker;
 			path = ../../HJImagePicker;
@@ -224,7 +226,8 @@
 				TargetAttributes = {
 					C4FA49951EF222B300489B3C = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = MFVVPXA4UW;
+						ProvisioningStyle = Automatic;
 					};
 					C4FA49AE1EF222B500489B3C = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -238,8 +241,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
 			);
 			mainGroup = C4FA498D1EF222B300489B3C;
 			productRefGroup = C4FA49971EF222B300489B3C /* Products */;
@@ -257,10 +258,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4FA49A91EF222B400489B3C /* LaunchScreen.storyboard in Resources */,
+				2A6A8E381EF82F9700ABFBFB /* HJImagePicker.strings in Resources */,
 				C4FA49C41EF228AD00489B3C /* imagePicker.xcassets in Resources */,
 				C4FA49A61EF222B400489B3C /* Assets.xcassets in Resources */,
-				C4FA49A41EF222B400489B3C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +285,7 @@
 				C4FA499E1EF222B400489B3C /* AppDelegate.m in Sources */,
 				C4FA49C21EF2283400489B3C /* HJImagePickerViewController.m in Sources */,
 				C4CF3F211EF76A2500904F76 /* HJCollectionViewLayout.m in Sources */,
+				2A6A8E341EF8168300ABFBFB /* HJImagePickerBottomView.m in Sources */,
 				C4FA49D31EF2678B00489B3C /* HJGridViewCell.m in Sources */,
 				C4CF3F241EF77E3000904F76 /* HJNavigationView.m in Sources */,
 				C4CF3F1D1EF366E900904F76 /* HJPhotoFetchManager.m in Sources */,
@@ -309,25 +310,6 @@
 			targetProxy = C4FA49B01EF222B500489B3C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		C4FA49A21EF222B400489B3C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C4FA49A31EF222B400489B3C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C4FA49A71EF222B400489B3C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C4FA49A81EF222B400489B3C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C4FA49B61EF222B500489B3C /* Debug */ = {
@@ -426,8 +408,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = MFVVPXA4UW;
 				INFOPLIST_FILE = HJImagePickerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WangCang.HJImagePickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -439,8 +423,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = MFVVPXA4UW;
 				INFOPLIST_FILE = HJImagePickerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WangCang.HJImagePickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

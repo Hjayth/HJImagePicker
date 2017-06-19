@@ -60,6 +60,8 @@
 - (UIImageView *)choseImageView {
     if (!_choseImageView) {
         _choseImageView = [UIImageView new];
+        [_choseImageView setImage:self.unselectedImage];
+        [_choseImageView setHighlighted:self.selectedImage];
     }
     return _choseImageView;
 
@@ -92,16 +94,10 @@
 }
 
 
+
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    if (selected) {
-        self.maskView.hidden = NO;
-        self.choseImageView.image = self.selectedImage;
-        return;
-    }
-    
-    self.maskView.hidden = YES;
-    self.choseImageView.image = self.unselectedImage;
+    self.choseImageView.highlighted = selected;
     
 }
 

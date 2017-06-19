@@ -9,7 +9,7 @@
 #import "HJGridView.h"
 #import "HJCollectionViewLayout.h"
 #import "HJNavigationView.h"
-
+#import "HJImagePickerBottomView.h"
 @implementation HJGridView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -23,8 +23,9 @@
 #pragma mark-
 #pragma mark- configureUIAppearance 
 - (void)configureUIAppearance {
+    self.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.collectionView];
-
+    [self addSubview:self.bottomView];
 }
 
 #pragma mark-
@@ -39,6 +40,14 @@
 
 #pragma mark-
 #pragma mark- Getters && Setters
+- (HJNavigationView *)navigationView {
+    if (!_navigationView) {
+        _navigationView = [HJNavigationView new];
+    }
+    return _navigationView;
+
+}
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         HJCollectionViewLayout * layout = [HJCollectionViewLayout new];
@@ -48,6 +57,14 @@
 
 }
 
+
+- (HJImagePickerBottomView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [HJImagePickerBottomView new];
+    }
+    return _bottomView;
+
+}
 
 #pragma mark-
 #pragma mark- SetupConstraints

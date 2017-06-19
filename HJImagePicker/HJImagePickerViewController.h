@@ -39,6 +39,8 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
 
 - (void)imagePicker:(HJImagePickerViewController *)imagePicker selectImageAssets:(NSArray <PHAsset *> *)imageAssets;
 
+- (void)didCancelimagePicker:(HJImagePickerViewController *)imagePicker;
+
 @end
 
 @interface HJImagePickerViewController : UIViewController

@@ -10,6 +10,7 @@
 #import "HJAlbumView.h"
 #import "HJGridView.h"
 #import "HJPhotoFetchManager.h"
+#import "HJNavigationView.h"
 
 @interface HJImagePickerViewController ()
 <
@@ -32,6 +33,12 @@
 
 
 /**
+ navigationView
+ */
+@property (nonatomic , strong) HJNavigationView * navigationView;
+
+
+/**
   album array
  */
 @property (nonatomic , strong) NSArray * albumsArr;
@@ -41,6 +48,7 @@
  image assets array
  */
 @property (nonatomic , strong) NSArray * imageAssetsArrs;
+
 
 
 @end
@@ -61,7 +69,11 @@
 #pragma mark-
 #pragma mark- configureUIAppearance 
 - (void)configureUIAppearance {
-   
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.gridView];
+    [self.view addSubview:self.albumView];
+    [self.view addSubview:self.navigationView];
+
 }
 
 
@@ -104,8 +116,6 @@
  */
 - (void)fetchPhotoData {
     self.albumsArr = [[HJPhotoFetchManager shareManager] fetchAssetCollections];
-    
-    
 
 }
 

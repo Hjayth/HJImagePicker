@@ -17,8 +17,8 @@
 
 + (instancetype)shareManager {
     static HJPhotoFetchManager * instance = nil;
-    static dispatch_once_t * onceToken;
-    dispatch_once(onceToken, ^{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         instance = [HJPhotoFetchManager new];
     });
     return instance;

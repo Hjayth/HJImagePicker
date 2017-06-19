@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class HJNavigationView;
+@class HJImagePickerBottomView;
 /**
  show photo gridView
  */
@@ -26,4 +27,9 @@
  */
 @property (nonatomic , strong) HJNavigationView * navigationView;
 
+
+/**
+ ImagePickerBottomView
+ */
+@property (nonatomic , strong) HJImagePickerBottomView * bottomView;
 @end

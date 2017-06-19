@@ -38,6 +38,6 @@
  */
 - (NSArray<PHAsset *> *)fetchPhotosWithAssetCollection:(PHAssetCollection *)assetCollection;
 
-- (NSDictionary *)fetchAblumInfo:()
+//- (NSDictionary *)fetchAblumInfo:()
 
 @end

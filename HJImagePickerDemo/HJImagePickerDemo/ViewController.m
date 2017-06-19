@@ -20,7 +20,10 @@
     // Do any additional setup after loading the view, typically from a nib.
     UIButton * but = [UIButton new];
     but.frame = CGRectMake(100, 100, 100, 30);
+    but.backgroundColor = [UIColor redColor];
+    [but setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     but.titleLabel.text = @"图片";
+    [but addTarget:self action:@selector(pushPhotoView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:but];
 
 }
