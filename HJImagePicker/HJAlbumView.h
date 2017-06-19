@@ -10,4 +10,9 @@
 
 @interface HJAlbumView : UIView
 
+/**
+ * @bref 显示album 的tableview
+ */
+@property (nonatomic , strong) UITableView * tableView;
+
 @end

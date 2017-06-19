@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "HJImagePickerViewController.h"
 
 @interface ViewController ()
 
@@ -17,8 +18,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UIButton * but = [UIButton new];
+    but.frame = CGRectMake(100, 100, 100, 30);
+    but.titleLabel.text = @"图片";
+    [self.view addSubview:but];
+
 }
 
+
+- (void)pushPhotoView {
+ 
+    HJImagePickerViewController * hjVC = [[HJImagePickerViewController alloc] init];
+    [self.navigationController pushViewController:hjVC
+                                         animated:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

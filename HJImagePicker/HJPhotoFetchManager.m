@@ -15,7 +15,7 @@
 
 @implementation HJPhotoFetchManager
 
-- (instancetype)shareManager {
++ (instancetype)shareManager {
     static HJPhotoFetchManager * instance = nil;
     static dispatch_once_t * onceToken;
     dispatch_once(onceToken, ^{
@@ -31,6 +31,7 @@
     PHFetchOptions * option = [[PHFetchOptions alloc] init];
     PHFetchResult * result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:option];
 
+    
     return nil;
 }
 

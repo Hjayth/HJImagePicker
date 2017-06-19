@@ -18,7 +18,7 @@
 
  @return singleInstance photo fetch manager
  */
-- (instancetype)shareManager;
++ (instancetype)shareManager;
 
 
 
@@ -37,4 +37,7 @@
  @return ablum photos asset
  */
 - (NSArray<PHAsset *> *)fetchPhotosWithAssetCollection:(PHAssetCollection *)assetCollection;
+
+- (NSDictionary *)fetchAblumInfo:()
+
 @end

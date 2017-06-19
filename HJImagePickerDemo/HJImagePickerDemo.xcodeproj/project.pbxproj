@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C4CF3F1D1EF366E900904F76 /* HJPhotoFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */; };
 		C4CF3F1E1EF3CCC600904F76 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FA49C61EF2304900489B3C /* Photos.framework */; };
+		C4CF3F211EF76A2500904F76 /* HJCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */; };
+		C4CF3F241EF77E3000904F76 /* HJNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F231EF77E3000904F76 /* HJNavigationView.m */; };
 		C4FA499B1EF222B300489B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499A1EF222B300489B3C /* main.m */; };
 		C4FA499E1EF222B400489B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499D1EF222B400489B3C /* AppDelegate.m */; };
 		C4FA49A11EF222B400489B3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49A01EF222B400489B3C /* ViewController.m */; };
@@ -37,6 +39,10 @@
 /* Begin PBXFileReference section */
 		C4CF3F1B1EF366E900904F76 /* HJPhotoFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJPhotoFetchManager.h; sourceTree = "<group>"; };
 		C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJPhotoFetchManager.m; sourceTree = "<group>"; };
+		C4CF3F1F1EF76A2500904F76 /* HJCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCollectionViewLayout.h; sourceTree = "<group>"; };
+		C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCollectionViewLayout.m; sourceTree = "<group>"; };
+		C4CF3F221EF77E3000904F76 /* HJNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJNavigationView.h; sourceTree = "<group>"; };
+		C4CF3F231EF77E3000904F76 /* HJNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNavigationView.m; sourceTree = "<group>"; };
 		C4FA49961EF222B300489B3C /* HJImagePickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HJImagePickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FA499A1EF222B300489B3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4FA499C1EF222B400489B3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -152,6 +158,10 @@
 				C4FA49D21EF2678B00489B3C /* HJGridViewCell.m */,
 				C4CF3F1B1EF366E900904F76 /* HJPhotoFetchManager.h */,
 				C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */,
+				C4CF3F1F1EF76A2500904F76 /* HJCollectionViewLayout.h */,
+				C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */,
+				C4CF3F221EF77E3000904F76 /* HJNavigationView.h */,
+				C4CF3F231EF77E3000904F76 /* HJNavigationView.m */,
 			);
 			name = HJImagePicker;
 			path = ../../HJImagePicker;
@@ -274,7 +284,9 @@
 				C4FA49CA1EF2645A00489B3C /* HJAlbumView.m in Sources */,
 				C4FA499E1EF222B400489B3C /* AppDelegate.m in Sources */,
 				C4FA49C21EF2283400489B3C /* HJImagePickerViewController.m in Sources */,
+				C4CF3F211EF76A2500904F76 /* HJCollectionViewLayout.m in Sources */,
 				C4FA49D31EF2678B00489B3C /* HJGridViewCell.m in Sources */,
+				C4CF3F241EF77E3000904F76 /* HJNavigationView.m in Sources */,
 				C4CF3F1D1EF366E900904F76 /* HJPhotoFetchManager.m in Sources */,
 				C4FA499B1EF222B300489B3C /* main.m in Sources */,
 			);

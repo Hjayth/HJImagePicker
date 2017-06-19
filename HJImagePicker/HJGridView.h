@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class HJNavigationView;
+/**
+ show photo gridView
+ */
 @interface HJGridView : UIView
+
+
+/**
+ show photo collectionView
+ */
+@property (nonatomic , strong ) UICollectionView * collectionView;
+
+
+/**
+ navigationView
+ */
+@property (nonatomic , strong) HJNavigationView * navigationView;
 
 @end

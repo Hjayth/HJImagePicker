@@ -12,23 +12,33 @@
 
 @interface HJAlbumView ()
 
-/**
- * @bref 显示album 的tableview
- */
-@property (nonatomic , strong) UITableView * tableView;
+
 
 @end
 
 
 @implementation HJAlbumView
+- (instancetype)init{
+    if (self = [super init]) {
+        
+    }
+    return self;
 
+}
 
+#pragma mark-
+#pragma mark- configureUIAppearance
+- (void)configureUIAppearance {
+    [self addSubview:self.tableView];
+
+}
 
 #pragma mark-
 #pragma mark- setter && getter
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        [_tableView registerClass:[HJAlbumTableViewCell class] forCellReuseIdentifier:NSStringFromClass([HJAlbumTableViewCell class])];
         
     }
     return _tableView;
