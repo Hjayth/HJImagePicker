@@ -8,7 +8,7 @@
 
 #import "HJAlbumView.h"
 #import "HJAlbumTableViewCell.h"
-
+#import <Masonry.h>
 
 @interface HJAlbumView ()
 
@@ -18,9 +18,9 @@
 
 
 @implementation HJAlbumView
-- (instancetype)init{
-    if (self = [super init]) {
-        
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self configureUIAppearance];
     }
     return self;
 
@@ -30,7 +30,7 @@
 #pragma mark- configureUIAppearance
 - (void)configureUIAppearance {
     [self addSubview:self.tableView];
-
+    [self setupSubviewsConstraints];
 }
 
 #pragma mark-
@@ -39,10 +39,19 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         [_tableView registerClass:[HJAlbumTableViewCell class] forCellReuseIdentifier:NSStringFromClass([HJAlbumTableViewCell class])];
+        _tableView.tableFooterView = [UIView new];
         
     }
     return _tableView;
     
+}
+
+#pragma mark-
+#pragma mark- setupSubviewsConstraints
+- (void)setupSubviewsConstraints {
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
 }
 
 

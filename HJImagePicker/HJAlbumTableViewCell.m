@@ -8,6 +8,7 @@
 
 #import "HJAlbumTableViewCell.h"
 #import <Photos/Photos.h>
+#import <Masonry.h>
 
 static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 
@@ -128,6 +129,23 @@ static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 #pragma mark-
 #pragma mark- SetupConstraints
 - (void)setupSubviewsContraints {
+    [self.coverImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.contentView);
+        make.leading.equalTo(self.contentView.mas_leading).offset(15.f);
+        make.height.width.mas_equalTo(44.f);
+    }];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.coverImageView.mas_right).offset(15.f);
+        make.top.equalTo(self.contentView.mas_top).offset(17.f);
+        make.height.mas_equalTo(16.f);
+    }];
+    
+    [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(7.f);
+        make.height.mas_equalTo(14.f);
+    }];
     
 }
 

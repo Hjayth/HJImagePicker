@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A1F57D21EF96657009391E9 /* HJCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F57D11EF96657009391E9 /* HJCollectionViewFlowLayout.m */; };
 		2A6A8E341EF8168300ABFBFB /* HJImagePickerBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */; };
+		7F60246B643E7C2B73525029 /* libPods-HJImagePickerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E93541319F3A416B641798CA /* libPods-HJImagePickerDemo.a */; };
+		A90BFCD4693A3C6053B9898C /* libPods-HJImagePickerDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B11A6E296AC11032B2C63DE /* libPods-HJImagePickerDemoUITests.a */; };
 		C4CF3F1D1EF366E900904F76 /* HJPhotoFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */; };
-		C4CF3F211EF76A2500904F76 /* HJCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */; };
 		C4CF3F241EF77E3000904F76 /* HJNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F231EF77E3000904F76 /* HJNavigationView.m */; };
 		C4CF3F251EF8A3E200904F76 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FA49C61EF2304900489B3C /* Photos.framework */; };
 		C4FA499B1EF222B300489B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499A1EF222B300489B3C /* main.m */; };
@@ -36,12 +38,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B11A6E296AC11032B2C63DE /* libPods-HJImagePickerDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HJImagePickerDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A1F57D01EF96657009391E9 /* HJCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		2A1F57D11EF96657009391E9 /* HJCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2A6A8E321EF8168300ABFBFB /* HJImagePickerBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJImagePickerBottomView.h; sourceTree = "<group>"; };
 		2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJImagePickerBottomView.m; sourceTree = "<group>"; };
+		9395D34498684FD86BC26ACF /* Pods-HJImagePickerDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJImagePickerDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HJImagePickerDemoUITests/Pods-HJImagePickerDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A5D29EA0DD2C9EFE31336EC9 /* Pods-HJImagePickerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJImagePickerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-HJImagePickerDemo/Pods-HJImagePickerDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C4CF3F1B1EF366E900904F76 /* HJPhotoFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJPhotoFetchManager.h; sourceTree = "<group>"; };
 		C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJPhotoFetchManager.m; sourceTree = "<group>"; };
-		C4CF3F1F1EF76A2500904F76 /* HJCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCollectionViewLayout.h; sourceTree = "<group>"; };
-		C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCollectionViewLayout.m; sourceTree = "<group>"; };
 		C4CF3F221EF77E3000904F76 /* HJNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJNavigationView.h; sourceTree = "<group>"; };
 		C4CF3F231EF77E3000904F76 /* HJNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNavigationView.m; sourceTree = "<group>"; };
 		C4FA49961EF222B300489B3C /* HJImagePickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HJImagePickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +72,9 @@
 		C4FA49CF1EF2676500489B3C /* HJAlbumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJAlbumTableViewCell.m; sourceTree = "<group>"; };
 		C4FA49D11EF2678B00489B3C /* HJGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJGridViewCell.h; sourceTree = "<group>"; };
 		C4FA49D21EF2678B00489B3C /* HJGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJGridViewCell.m; sourceTree = "<group>"; };
+		CB8854312E387EFC4F626DDC /* Pods-HJImagePickerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJImagePickerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HJImagePickerDemo/Pods-HJImagePickerDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		D65686D22F414DD050EEB6DA /* Pods-HJImagePickerDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HJImagePickerDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HJImagePickerDemoUITests/Pods-HJImagePickerDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E93541319F3A416B641798CA /* libPods-HJImagePickerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HJImagePickerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4CF3F251EF8A3E200904F76 /* Photos.framework in Frameworks */,
+				7F60246B643E7C2B73525029 /* libPods-HJImagePickerDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,12 +91,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A90BFCD4693A3C6053B9898C /* libPods-HJImagePickerDemoUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A2E24AEC7F6449B8C18FB05 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CB8854312E387EFC4F626DDC /* Pods-HJImagePickerDemo.debug.xcconfig */,
+				A5D29EA0DD2C9EFE31336EC9 /* Pods-HJImagePickerDemo.release.xcconfig */,
+				D65686D22F414DD050EEB6DA /* Pods-HJImagePickerDemoUITests.debug.xcconfig */,
+				9395D34498684FD86BC26ACF /* Pods-HJImagePickerDemoUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C4FA498D1EF222B300489B3C = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +116,7 @@
 				C4FA49B21EF222B500489B3C /* HJImagePickerDemoUITests */,
 				C4FA49971EF222B300489B3C /* Products */,
 				C4FA49C51EF2304800489B3C /* Frameworks */,
+				5A2E24AEC7F6449B8C18FB05 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,12 +177,12 @@
 				C4FA49D21EF2678B00489B3C /* HJGridViewCell.m */,
 				C4CF3F1B1EF366E900904F76 /* HJPhotoFetchManager.h */,
 				C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */,
-				C4CF3F1F1EF76A2500904F76 /* HJCollectionViewLayout.h */,
-				C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */,
 				C4CF3F221EF77E3000904F76 /* HJNavigationView.h */,
 				C4CF3F231EF77E3000904F76 /* HJNavigationView.m */,
 				2A6A8E321EF8168300ABFBFB /* HJImagePickerBottomView.h */,
 				2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */,
+				2A1F57D01EF96657009391E9 /* HJCollectionViewFlowLayout.h */,
+				2A1F57D11EF96657009391E9 /* HJCollectionViewFlowLayout.m */,
 			);
 			name = HJImagePicker;
 			path = ../../HJImagePicker;
@@ -170,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				C4FA49C61EF2304900489B3C /* Photos.framework */,
+				E93541319F3A416B641798CA /* libPods-HJImagePickerDemo.a */,
+				0B11A6E296AC11032B2C63DE /* libPods-HJImagePickerDemoUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -181,9 +205,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4FA49B81EF222B500489B3C /* Build configuration list for PBXNativeTarget "HJImagePickerDemo" */;
 			buildPhases = (
+				FE46AD86243733E64D0719E9 /* [CP] Check Pods Manifest.lock */,
 				C4FA49921EF222B300489B3C /* Sources */,
 				C4FA49931EF222B300489B3C /* Frameworks */,
 				C4FA49941EF222B300489B3C /* Resources */,
+				9467AD56F0AEED309AEF135C /* [CP] Embed Pods Frameworks */,
+				35D880A08483DC4DC773B878 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -198,9 +225,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4FA49BB1EF222B500489B3C /* Build configuration list for PBXNativeTarget "HJImagePickerDemoUITests" */;
 			buildPhases = (
+				A9A35967C3EEF830B929BE9A /* [CP] Check Pods Manifest.lock */,
 				C4FA49AB1EF222B500489B3C /* Sources */,
 				C4FA49AC1EF222B500489B3C /* Frameworks */,
 				C4FA49AD1EF222B500489B3C /* Resources */,
+				46B54115C9C6FE319AA06F72 /* [CP] Embed Pods Frameworks */,
+				5D68F2708090656DA8B331D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,8 +253,8 @@
 				TargetAttributes = {
 					C4FA49951EF222B300489B3C = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = XDK267KQ83;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = MFVVPXA4UW;
+						ProvisioningStyle = Automatic;
 					};
 					C4FA49AE1EF222B500489B3C = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -237,6 +267,9 @@
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
 			mainGroup = C4FA498D1EF222B300489B3C;
 			productRefGroup = C4FA49971EF222B300489B3C /* Products */;
 			projectDirPath = "";
@@ -267,6 +300,99 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		35D880A08483DC4DC773B878 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HJImagePickerDemo/Pods-HJImagePickerDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		46B54115C9C6FE319AA06F72 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HJImagePickerDemoUITests/Pods-HJImagePickerDemoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D68F2708090656DA8B331D7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HJImagePickerDemoUITests/Pods-HJImagePickerDemoUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9467AD56F0AEED309AEF135C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HJImagePickerDemo/Pods-HJImagePickerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9A35967C3EEF830B929BE9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FE46AD86243733E64D0719E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C4FA49921EF222B300489B3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -274,11 +400,11 @@
 			files = (
 				C4FA49CD1EF2648F00489B3C /* HJGridView.m in Sources */,
 				C4FA49D01EF2676500489B3C /* HJAlbumTableViewCell.m in Sources */,
+				2A1F57D21EF96657009391E9 /* HJCollectionViewFlowLayout.m in Sources */,
 				C4FA49A11EF222B400489B3C /* ViewController.m in Sources */,
 				C4FA49CA1EF2645A00489B3C /* HJAlbumView.m in Sources */,
 				C4FA499E1EF222B400489B3C /* AppDelegate.m in Sources */,
 				C4FA49C21EF2283400489B3C /* HJImagePickerViewController.m in Sources */,
-				C4CF3F211EF76A2500904F76 /* HJCollectionViewLayout.m in Sources */,
 				2A6A8E341EF8168300ABFBFB /* HJImagePickerBottomView.m in Sources */,
 				C4FA49D31EF2678B00489B3C /* HJGridViewCell.m in Sources */,
 				C4CF3F241EF77E3000904F76 /* HJNavigationView.m in Sources */,
@@ -400,26 +526,28 @@
 		};
 		C4FA49B91EF222B500489B3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB8854312E387EFC4F626DDC /* Pods-HJImagePickerDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = XDK267KQ83;
+				DEVELOPMENT_TEAM = MFVVPXA4UW;
 				INFOPLIST_FILE = HJImagePickerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WangCang.HJImagePickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77f0e1f5-41af-44ef-975e-38903d34a039";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development *";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		C4FA49BA1EF222B500489B3C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5D29EA0DD2C9EFE31336EC9 /* Pods-HJImagePickerDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MFVVPXA4UW;
 				INFOPLIST_FILE = HJImagePickerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -431,6 +559,7 @@
 		};
 		C4FA49BC1EF222B500489B3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D65686D22F414DD050EEB6DA /* Pods-HJImagePickerDemoUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = HJImagePickerDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -442,6 +571,7 @@
 		};
 		C4FA49BD1EF222B500489B3C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9395D34498684FD86BC26ACF /* Pods-HJImagePickerDemoUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = HJImagePickerDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

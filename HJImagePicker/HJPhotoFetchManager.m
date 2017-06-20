@@ -8,10 +8,9 @@
 
 #import "HJPhotoFetchManager.h"
 #import <Photos/Photos.h>
-#import <Photos/PHImageManager.h>
 @interface HJPhotoFetchManager ()
 
-//@property (nonatomic , strong) HJPhotoFetchManager * imageManager;
+@property (nonatomic , strong) PHCachingImageManager * imageManager;
 
 @end
 
@@ -96,13 +95,38 @@
     
     [fetchResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PHAsset * asset = (PHAsset *) obj;
-     [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(330.f, 330.f) contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-         [imageArr addObject:result];
+        PHCachingImageManager * manager = [[PHCachingImageManager alloc] init];
+     [manager requestImageForAsset:asset targetSize:CGSizeMake(330.f, 330.f) contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        // [imageArr addObject:result];
      }];
         
         
     }];
     return imageArr;
+}
+
+
+
+- (UIImage *)fetchImageWithAsset:(PHAsset *)asset withSize:(CGSize )size{
+   __block UIImage * image ;
+    PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
+    options.synchronous = YES;
+    [self.imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        image = result;
+    }];
+    return image;
+
+}
+
+
+#pragma mark-
+#pragma mark- setter && getter
+- (PHCachingImageManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [[PHCachingImageManager alloc] init];
+    }
+    return _imageManager;
+
 }
 
 @end

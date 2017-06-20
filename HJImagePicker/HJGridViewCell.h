@@ -11,6 +11,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 
 @interface HJGridViewCell : UICollectionViewCell
 
@@ -35,5 +36,9 @@
  photo UNSelected status image
  */
 @property (nonatomic , strong) UIImage * unselectedImage;
+
+@property (nonatomic , getter=isChose) BOOL isChosed;
+
+@property (nonatomic ,strong) PHAsset * photoAsset;
 
 @end

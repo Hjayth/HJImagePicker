@@ -8,14 +8,34 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ confim block
+ */
 typedef void(^confirmBlock)();
 
+/**
+ imagePickerBottomView
+ */
 @interface HJImagePickerBottomView : UIView
 
+
+/**
+ selcted count
+ */
 @property (nonatomic , assign)  NSInteger  count;
 
+
+/**
+ confim but
+ */
 @property (nonatomic , strong) UIButton * confirmBut;
 
+
+/**
+ confim
+
+ @param confim confim block
+ */
 - (void)confirm:(confirmBlock)confim;
 
 @end

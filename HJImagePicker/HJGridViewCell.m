@@ -7,6 +7,8 @@
 //
 
 #import "HJGridViewCell.h"
+#import <Masonry.h>
+#import "HJPhotoFetchManager.h"
 
 @interface  HJGridViewCell ()
 
@@ -14,7 +16,7 @@
 
 @property (nonatomic , strong) UIImageView * maskView;
 
-@property (nonatomic , strong) UIImageView * choseImageView;
+@property (nonatomic , strong) UIButton * choseImageView;
 
 @end
 
@@ -27,13 +29,22 @@
 
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self configureUIAppearance];
+
+}
+
 #pragma mark-
 #pragma mark- configureUIAppearance 
 - (void)configureUIAppearance {
+    self.unselectedImage = [UIImage imageNamed:@"imagePicker_checkbox"];
+    self.selectedImage = [UIImage imageNamed:@"imagePicker_add"];
     [self.contentView addSubview:self.photoImageView];
-    [self.contentView addSubview:self.maskView];
+  //  [self.contentView addSubview:self.maskView];
+    self.isChosed = NO;
     [self.contentView addSubview:self.choseImageView];
-    
+    [self setupSubviewsContraints];
 
 }
 
@@ -57,11 +68,14 @@
 
 }
 
-- (UIImageView *)choseImageView {
+
+
+- (UIButton *)choseImageView {
     if (!_choseImageView) {
-        _choseImageView = [UIImageView new];
-        [_choseImageView setImage:self.unselectedImage];
-        [_choseImageView setHighlighted:self.selectedImage];
+        _choseImageView = [UIButton new];
+        _choseImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_choseImageView setImage:self.unselectedImage forState:UIControlStateNormal];
+        [_choseImageView setImage:self.selectedImage forState:UIControlStateSelected];
     }
     return _choseImageView;
 
@@ -87,19 +101,42 @@
 
 }
 
-#pragma mark-
-#pragma mark- SetupConstraints
-- (void)setupSubviewsContraints {
-    
-}
+- (void)setPhotoAsset:(PHAsset *)photoAsset {
+    _photoAsset = photoAsset;
+   self.photoImageView.image =  [[HJPhotoFetchManager shareManager] fetchImageWithAsset:_photoAsset withSize:CGSizeMake(self.frame.size.width / 3.f, self.frame.size.width / 3.f)];
 
+}
 
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    self.choseImageView.highlighted = selected;
+    self.choseImageView.selected = YES;
     
 }
+
+- (void)setIsChosed:(BOOL)isChosed {
+    _isChosed = isChosed;
+    self.choseImageView.selected = isChosed;
+    
+}
+#pragma mark-
+#pragma mark- SetupConstraints
+- (void)setupSubviewsContraints {
+    [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    
+    [self.choseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).offset(-14.f);
+        make.top.equalTo(self.contentView.mas_top).offset(14.f);
+        make.width.height.mas_equalTo(20.f);
+    }];
+
+}
+
+
+
+
 
 
 @end

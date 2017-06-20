@@ -42,4 +42,6 @@
 
 //- (NSDictionary *)fetchAblumInfo:()
 
+- (UIImage *)fetchImageWithAsset:(PHAsset *)asset withSize:(CGSize )size ;
+
 @end
