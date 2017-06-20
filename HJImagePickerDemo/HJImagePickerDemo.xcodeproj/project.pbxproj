@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2A6A8E341EF8168300ABFBFB /* HJImagePickerBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */; };
-		2A6A8E381EF82F9700ABFBFB /* HJImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A6A8E371EF82F9700ABFBFB /* HJImagePicker.strings */; };
 		C4CF3F1D1EF366E900904F76 /* HJPhotoFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */; };
-		C4CF3F1E1EF3CCC600904F76 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FA49C61EF2304900489B3C /* Photos.framework */; };
 		C4CF3F211EF76A2500904F76 /* HJCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F201EF76A2500904F76 /* HJCollectionViewLayout.m */; };
 		C4CF3F241EF77E3000904F76 /* HJNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CF3F231EF77E3000904F76 /* HJNavigationView.m */; };
+		C4CF3F251EF8A3E200904F76 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FA49C61EF2304900489B3C /* Photos.framework */; };
 		C4FA499B1EF222B300489B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499A1EF222B300489B3C /* main.m */; };
 		C4FA499E1EF222B400489B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA499D1EF222B400489B3C /* AppDelegate.m */; };
 		C4FA49A11EF222B400489B3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FA49A01EF222B400489B3C /* ViewController.m */; };
@@ -39,7 +38,6 @@
 /* Begin PBXFileReference section */
 		2A6A8E321EF8168300ABFBFB /* HJImagePickerBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJImagePickerBottomView.h; sourceTree = "<group>"; };
 		2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJImagePickerBottomView.m; sourceTree = "<group>"; };
-		2A6A8E371EF82F9700ABFBFB /* HJImagePicker.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = HJImagePicker.strings; sourceTree = "<group>"; };
 		C4CF3F1B1EF366E900904F76 /* HJPhotoFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJPhotoFetchManager.h; sourceTree = "<group>"; };
 		C4CF3F1C1EF366E900904F76 /* HJPhotoFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJPhotoFetchManager.m; sourceTree = "<group>"; };
 		C4CF3F1F1EF76A2500904F76 /* HJCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCollectionViewLayout.h; sourceTree = "<group>"; };
@@ -76,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4CF3F1E1EF3CCC600904F76 /* Photos.framework in Frameworks */,
+				C4CF3F251EF8A3E200904F76 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +161,6 @@
 				C4CF3F231EF77E3000904F76 /* HJNavigationView.m */,
 				2A6A8E321EF8168300ABFBFB /* HJImagePickerBottomView.h */,
 				2A6A8E331EF8168300ABFBFB /* HJImagePickerBottomView.m */,
-				2A6A8E371EF82F9700ABFBFB /* HJImagePicker.strings */,
 			);
 			name = HJImagePicker;
 			path = ../../HJImagePicker;
@@ -226,8 +223,8 @@
 				TargetAttributes = {
 					C4FA49951EF222B300489B3C = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = MFVVPXA4UW;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = XDK267KQ83;
+						ProvisioningStyle = Manual;
 					};
 					C4FA49AE1EF222B500489B3C = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -240,8 +237,6 @@
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
-			knownRegions = (
-			);
 			mainGroup = C4FA498D1EF222B300489B3C;
 			productRefGroup = C4FA49971EF222B300489B3C /* Products */;
 			projectDirPath = "";
@@ -258,7 +253,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A6A8E381EF82F9700ABFBFB /* HJImagePicker.strings in Resources */,
 				C4FA49C41EF228AD00489B3C /* imagePicker.xcassets in Resources */,
 				C4FA49A61EF222B400489B3C /* Assets.xcassets in Resources */,
 			);
@@ -353,7 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -396,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -409,13 +403,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = MFVVPXA4UW;
+				DEVELOPMENT_TEAM = XDK267KQ83;
 				INFOPLIST_FILE = HJImagePickerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WangCang.HJImagePickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "77f0e1f5-41af-44ef-975e-38903d34a039";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development *";
 			};
 			name = Debug;
 		};
@@ -424,7 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = MFVVPXA4UW;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HJImagePickerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

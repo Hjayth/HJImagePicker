@@ -55,7 +55,7 @@
 #pragma mark- setter && getter
 - (void)setCount:(NSInteger)count {
     _count = count;
-    self.selectedCountLabel.text = [NSString stringWithFormat:@"%@%ld%@%@",NSLocalizedStringFromTable(@"已选", @"HJImagePicker",nil),_count,NSLocalizedStringFromTable(@"张", @"HJImagePicker", nil),NSLocalizedStringFromTable(@"照片", @"HJImagePicker", nil)];
+   // self.selectedCountLabel.text = [NSString stringWithFormat:@"%@%ld%@%@",NSLocalizedStringFromTable(@"已选", @"HJImagePicker",nil),_count,NSLocalizedStringFromTable(@"张", @"HJImagePicker", nil),NSLocalizedStringFromTable(@"照片", @"HJImagePicker", nil)];
 }
 
 - (UILabel *)selectedCountLabel {

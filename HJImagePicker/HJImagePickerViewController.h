@@ -34,11 +34,30 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
 @class HJImagePickerViewController;
 @protocol HJImagePickerDelegate <NSObject>;
 
+
+/**
+ confim the selectedImages to the DelegateVC
+ 
+ @param imagePicker imagePicker
+ @param imagesArr  image in the imagesArr is kind of uiimage
+ */
 - (void)imagePicker:(HJImagePickerViewController *)imagePicker
-       selectImages:(NSArray *)imagesArr;
+       selectedImages:(NSArray *)imagesArr;
 
-- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectImageAssets:(NSArray <PHAsset *> *)imageAssets;
 
+/**
+ confim the selectedImages to the DelegateVC
+
+ @param imagePicker imagePicker
+ @param imageAssets image in the imageAssets is kind of PHAsset,you shoulde use PHImageManager to fetch the image
+ */
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectedImageAssets:(NSArray <PHAsset *> *)imageAssets;
+
+/**
+ cancel choice and go back last vc
+
+ @param imagePicker imagePicker
+ */
 - (void)didCancelimagePicker:(HJImagePickerViewController *)imagePicker;
 
 @end
@@ -57,5 +76,31 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
  limit multi image selected count
  */
 @property (nonatomic , assign) NSInteger limitSelctedCount;
+
+
+/**
+ nav right item
+ */
+@property (nonatomic , strong) UIButton * navRightItem;
+
+
+/**
+ nav center item
+ */
+@property (nonatomic , strong) UIButton * navCenterItem;
+
+/**
+ nav left item
+ */
+@property (nonatomic , strong) UIButton * navleftItem;
+
+
+/**
+ show the photo limited to the size
+ */
+@property (nonatomic , assign) CGSize photoSize;
+
+
+
 
 @end

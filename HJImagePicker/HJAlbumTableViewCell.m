@@ -7,6 +7,9 @@
 //
 
 #import "HJAlbumTableViewCell.h"
+#import <Photos/Photos.h>
+
+static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 
 @interface HJAlbumTableViewCell ()
 
@@ -44,11 +47,8 @@
     [self.contentView addSubview:self.coverImageView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.countLabel];
-
+    [self setupSubviewsContraints];
 }
-
-#pragma mark-
-#pragma mark- <#代理类名#> delegate
 
 
 #pragma mark-
@@ -58,6 +58,8 @@
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
+    
+    
 }
 
 #pragma mark-
@@ -85,18 +87,44 @@
 - (UIImageView *)coverImageView {
     if (!_coverImageView) {
         _coverImageView = [UIImageView new];
+        _coverImageView.contentMode = UIViewContentModeScaleAspectFit;
+        
     }
     return _coverImageView;
 
 }
 
-- (void)setCoverImage:(UIImage *)coverImage {
-    _coverImage = coverImage;
-    self.coverImageView.image = _coverImage;
+
+- (void)setAlbumCoverImage:(UIImage *)albumCoverImage {
+    _albumCoverImage = albumCoverImage;
+    self.coverImageView.image = _albumCoverImage;
+    
 
 }
 
+- (void)setAlbumTitle:(NSString *)albumTitle {
+    _albumTitle = albumTitle;
+    self.titleLabel.text = _albumTitle;
 
+}
+
+- (void)setAlbumImageCount:(NSInteger)albumImageCount {
+    _albumImageCount = albumImageCount;
+    self.countLabel.text = [NSString stringWithFormat:@"%ld",_albumImageCount];
+}
+
+
+- (void)setAlbumInfo:(NSDictionary *)albumInfo {
+    _albumInfo = albumInfo;
+    
+    __weak typeof(self)kWeakSelf = self;
+    self.titleLabel.text = _albumInfo[@"title"];
+    PHFetchResult * result = _albumInfo[@"fetchResult"];
+    PHAsset * asset =(PHAsset *) [result objectAtIndex:0];
+    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:kAlbumCoverImageSize contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        kWeakSelf.coverImageView.image = result;
+    }];
+}
 #pragma mark-
 #pragma mark- SetupConstraints
 - (void)setupSubviewsContraints {

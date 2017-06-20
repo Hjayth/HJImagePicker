@@ -15,9 +15,23 @@
 
 
 /**
- @bref coverImage
+ @bref album coverImage
  */
-@property (nonatomic , strong) UIImage * coverImage;
+@property (nonatomic , strong) UIImage * albumCoverImage;
 
+
+/**
+ album title
+ */
+@property (nonatomic , strong) NSString * albumTitle;
+
+
+/**
+ album photo count 
+ */
+@property (nonatomic , assign) NSInteger albumImageCount;
+
+
+@property (nonatomic , strong) NSDictionary * albumInfo;
 
 @end
