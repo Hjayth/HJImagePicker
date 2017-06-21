@@ -21,12 +21,12 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
     /**
      chose singel image
      */
-    HJImagePickerSelectedSingle,
+    HJImagePickerSelectedTpyeSingle = 0,
     
     /**
      chose multi images
      */
-    HJImagePickerSelectedMulti,
+    HJImagePickerSelectedTypeMulti = 1,
  
 };
 
@@ -81,13 +81,13 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
 /**
  nav right item
  */
-@property (nonatomic , strong) UIButton * navRightItem;
+@property (nonatomic , strong ) UIButton * navRightItem;
 
 
 /**
  nav center item
  */
-@property (nonatomic , strong) UIButton * navCenterItem;
+@property (nonatomic , strong ) UIButton * navCenterItem;
 
 /**
  nav left item
@@ -101,6 +101,7 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
 @property (nonatomic , assign) CGSize photoSize;
 
 
+@property (nonatomic , strong) NSArray * mediaType;
 
-
+@property (nonatomic , assign) HJImagePickerSelectedType  imagePickerType;
 @end

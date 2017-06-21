@@ -29,7 +29,7 @@
 
  @return photo ablum arr
  */
-- (NSMutableArray <PHAssetCollection *> *)fetchAssetCollections;
+- (NSMutableArray  *)fetchAssetCollections;
 
 
 /**
@@ -38,7 +38,7 @@
  @param fetchResult asset collection fetch result
  @return ablum photos asset
  */
-- (NSMutableArray<UIImage *> *)fetchPhotosWithAssetCollectionFetchResult:(PHFetchResult *)fetchResult;
+- (NSMutableArray<PHAsset *> *)fetchPhotosWithAssetCollectionFetchResult:(PHFetchResult *)fetchResult;
 
 //- (NSDictionary *)fetchAblumInfo:()
 

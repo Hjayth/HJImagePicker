@@ -25,6 +25,31 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 #define kHJWeakSelf(weakSelf) __weak typeof(self) (weakSelf) = self
 
 
+//Helper methods
+@implementation NSIndexSet (Convenience)
+- (NSArray *)aapl_indexPathsFromIndexesWithSection:(NSUInteger)section {
+    NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:self.count];
+    [self enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [indexPaths addObject:[NSIndexPath indexPathForItem:idx inSection:section]];
+    }];
+    return indexPaths;
+}
+@end
+
+@implementation UICollectionView (Convenience)
+- (NSArray *)aapl_indexPathsForElementsInRect:(CGRect)rect {
+    NSArray *allLayoutAttributes = [self.collectionViewLayout layoutAttributesForElementsInRect:rect];
+    if (allLayoutAttributes.count == 0) { return nil; }
+    NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:allLayoutAttributes.count];
+    for (UICollectionViewLayoutAttributes *layoutAttributes in allLayoutAttributes) {
+        NSIndexPath *indexPath = layoutAttributes.indexPath;
+        [indexPaths addObject:indexPath];
+    }
+    return indexPaths;
+}
+@end
+
+
 @interface HJImagePickerViewController ()
 <
     UITableViewDelegate,
@@ -87,9 +112,9 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 #pragma mark- View Life Cycle
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    if (self.navigationController) {
-//        self.navigationController.navigationBarHidden = YES;
-//    }
+    if (self.navigationController) {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
     
 }
 
@@ -99,8 +124,16 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     [self fetchPhotoData];
     [self configureUIAppearance];
     
+    
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.navigationController) {
+        [self.navigationController setNavigationBarHidden:NO];
+    }
+
+}
 #pragma mark-
 #pragma mark- configureUIAppearance 
 - (void)configureUIAppearance {
@@ -111,13 +144,17 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     [self.navigationView.rightItem addTarget:self action:@selector(didCancel:) forControlEvents:UIControlEventTouchUpInside];
     kHJWeakSelf(weakSelf);
     [self.gridView.bottomView confirm:^{
+        
+        [weakSelf backToTheLastView];
+        
         if ([weakSelf.delegate respondsToSelector:@selector(imagePicker:selectedImages:)]) {
             [weakSelf.delegate imagePicker:self selectedImageAssets:self.selectedImageArr];
         }
     }];
     
     [self.navigationView.centernItem addTarget:self action:@selector(navCenterItemAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [self setupSubviewsContraints];
+    [self setupSubviewsContraints];
+    [self resetCachedAssets];
 }
 
 
@@ -140,6 +177,13 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     if (!albumCell) {
         albumCell = [[HJAlbumTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAlbumCellID];
     }
+    NSInteger currentTag = albumCell.tag + 1;
+    albumCell.tag = currentTag;
+    [self.imageManager requestImageForAsset:self.albumsArr[indexPath.row][@"fetchResult"][0] targetSize:CGSizeMake(44, 44.f) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        if (albumCell.tag == currentTag) {
+            [albumCell.coverImageView setImage:result];
+        }
+    }];
     albumCell.albumInfo = self.albumsArr[indexPath.row];
     return albumCell;
 }
@@ -165,42 +209,56 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     return result.count;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HJGridViewCell * photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:kPhotoCellID forIndexPath:indexPath];
+   // photoCell.photo = self.imageAssetsArrs[indexPath.row];
    // photoCell.photo = self.imageAssetsArrs[indexPath.row];
     NSInteger currentTag = photoCell.tag + 1;
     photoCell.tag = currentTag;
    // PHAsset *asset = self.assetsFetchResults[indexPath.item];
     PHAsset * asset = self.selectedAlbumInfo[@"fetchResult"][indexPath.row];
-    [[[PHCachingImageManager alloc] init] requestImageForAsset:asset
-                                 targetSize:CGSizeMake(self.view.frame.size.width / 3.f, self.view.frame.size.width / 3.f)
+    PHImageRequestOptions * option = [[PHImageRequestOptions alloc] init];
+    option.networkAccessAllowed = YES;
+    option.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
+    photoCell.photoAsset = asset;
+    [self.imageManager requestImageForAsset:asset
+                                 targetSize:CGSizeMake(123.f,123.f)
                                 contentMode:PHImageContentModeAspectFill
-                                    options:nil
+                                    options:option
                               resultHandler:^(UIImage *result, NSDictionary *info) {
                                   
                                   // Only update the thumbnail if the cell tag hasn't changed. Otherwise, the cell has been re-used.
                                   if (photoCell.tag == currentTag) {
-                                      photoCell.photo = result;
+                                      [photoCell.photoImageView setImage:result];
+                                
                                   }
                               }];
-
+    if ([self.selectedImageArr containsObject:photoCell.photo]) {
+        photoCell.selected = YES;
+        [self.gridView.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    }else {
+        photoCell.selected = NO;
+    }
+    
     return photoCell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HJGridViewCell * cell = (HJGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.photoAsset = self.selectedAlbumInfo[@"fetchResult"][indexPath.row];
-    cell.isChosed = !cell.isChosed;
-    if (cell.isChose) {
-       // [self.selectedImageArr addObject:self.imageAssetsArrs[indexPath.row]];
-        return;
-    }
-   // [self.selectedImageArr removeObject:self.imageAssetsArrs[indexPath.row]];
-
+    [self.selectedImageArr addObject:cell.photoAsset];
+    self.gridView.bottomView.count = self.selectedImageArr.count;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+     HJGridViewCell * cell = (HJGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self.selectedImageArr removeObject:cell.photo];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.gridView.collectionView) {
+        [self updateCachedAssets];
+    }
 
+}
 #pragma mark-
 #pragma mark- Event response
 
@@ -236,17 +294,19 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 - (void)fetchPhotoData {
     self.albumsArr = [[HJPhotoFetchManager shareManager] fetchAssetCollections];
     self.selectedAlbumInfo = self.albumsArr[0];
-    //self.imageAssetsArrs = [[HJPhotoFetchManager shareManager] fetchPhotosWithAssetCollectionFetchResult:self.albumsArr[0][@"fetchResult"]];
     [self.navigationView.centernItem setTitle:self.albumsArr[0][@"title"] forState:UIControlStateNormal];
+    [self updateCachedAssets];
 }
 
 /**
  update photo data
  */
 - (void)updatePhotoData {
-//    self.imageAssetsArrs = [[HJPhotoFetchManager shareManager] fetchPhotosWithAssetCollectionFetchResult:self.selectedAlbumInfo[@"fetchResult"]];
+    
+    [self resetCachedAssets];
+    self.imageManager = nil;
     [self.gridView.collectionView  reloadData ];
-
+    [self updateCachedAssets];
 }
 
 /**
@@ -261,8 +321,6 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
         [UIView animateWithDuration:0.8 animations:^{
             weakSelf.albumView.frame = CGRectMake(0, -KScreenHeight + 64, KScreenWidth, KScreenHeight - 64);
         }];
-        
-      // [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.albumView cache:YES];
         return;
     }
    
@@ -271,98 +329,39 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     }];
 }
 
+
+/**
+ updateNavTitle
+ */
 - (void)updateNavTitle {
     [self.navigationView.centernItem setTitle:self.selectedAlbumInfo[@"title"] forState:UIControlStateNormal];
 
 }
-#pragma mark-
-#pragma mark- Getters && Setters
-- (HJGridView *)gridView {
-    if (!_gridView) {
-        _gridView = [[HJGridView alloc] initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height - 60)];
-        _gridView.collectionView.dataSource = self;
-        _gridView.collectionView.delegate = self;
-        [_gridView.collectionView registerClass:[HJGridViewCell class] forCellWithReuseIdentifier:kPhotoCellID];
+
+- (void)backToTheLastView {
+    if ([self.navigationController.viewControllers containsObject:self]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    return _gridView;
-}
-
-- (HJAlbumView *)albumView {
-    if (!_albumView) {
-        _albumView = [[HJAlbumView alloc] initWithFrame:self.gridView.frame];
-        _albumView.tableView.delegate = self;
-        _albumView.tableView.dataSource = self;
-        
-    }
-    return _albumView;
 
 }
 
-- (NSArray *)albumsArr {
-    if (!_albumsArr) {
-        _albumsArr = [NSArray array];
-    }
-    return _albumsArr;
-
-}
-
-- (NSArray *)imageAssetsArrs {
-    if (!_imageAssetsArrs) {
-        _imageAssetsArrs = [NSArray array];
-    }
-    return _imageAssetsArrs;
-
-}
-
-- (NSMutableArray *)selectedImageArr {
-    if (!_selectedImageArr) {
-        _selectedImageArr = [NSMutableArray arrayWithCapacity:0];
-    }
-    return _selectedImageArr;
-
-}
-
-- (PHCachingImageManager *)imageManager {
-    if (!_imageManager) {
-        _imageManager = [[PHCachingImageManager alloc] init];
-    }
-    return _imageManager;
-}
-#pragma mark-
-#pragma mark- SetupConstraints
-- (void)setupSubviewsContraints {
-    [self.navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(20.f);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(44.f);
-    }];
-    
-    
-    
-    [self.gridView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.navigationView.mas_bottom);
-        make.left.right.bottom.equalTo(self.view);
-    }];
-    
-    [self.albumView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.gridView);
-    }];
-    
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    NSLog(@"ss");
-}
 
 
-
+/**
+ reset the asset cache
+ */
 - (void)resetCachedAssets
 {
     [self.imageManager stopCachingImagesForAllAssets];
     self.previousPreheatRect = CGRectZero;
 }
 
+
+/**
+ updateCacheAsset
+ */
 - (void)updateCachedAssets
 {
     BOOL isViewVisible = [self isViewLoaded] && [[self view] window] != nil;
@@ -374,7 +373,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     
     // If scrolled by a "reasonable" amount...
     CGFloat delta = ABS(CGRectGetMidY(preheatRect) - CGRectGetMidY(self.previousPreheatRect));
-    if (delta > CGRectGetHeight(self.collectionView.bounds) / 3.0f) {
+    if (delta > CGRectGetHeight(self.gridView.collectionView.bounds) / 3.0f) {
         
         // Compute the assets to start caching and to stop caching.
         NSMutableArray *addedIndexPaths = [NSMutableArray array];
@@ -384,26 +383,37 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
             NSArray *indexPaths = [self.gridView.collectionView aapl_indexPathsForElementsInRect:removedRect];
             [removedIndexPaths addObjectsFromArray:indexPaths];
         } addedHandler:^(CGRect addedRect) {
-            NSArray *indexPaths = [self.collectionView aapl_indexPathsForElementsInRect:addedRect];
+            NSArray *indexPaths = [self.gridView.collectionView aapl_indexPathsForElementsInRect:addedRect];
             [addedIndexPaths addObjectsFromArray:indexPaths];
         }];
         
         NSArray *assetsToStartCaching = [self assetsAtIndexPaths:addedIndexPaths];
         NSArray *assetsToStopCaching = [self assetsAtIndexPaths:removedIndexPaths];
-        
+        PHImageRequestOptions * option = [[PHImageRequestOptions alloc] init];
+        option.networkAccessAllowed = YES;
+        option.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
         [self.imageManager startCachingImagesForAssets:assetsToStartCaching
-                                            targetSize:AssetGridThumbnailSize
+                                            targetSize:self.photoSize
                                            contentMode:PHImageContentModeAspectFill
-                                               options:nil];
+                                               options:option];
         [self.imageManager stopCachingImagesForAssets:assetsToStopCaching
-                                           targetSize:AssetGridThumbnailSize
+                                           targetSize:self.photoSize
                                           contentMode:PHImageContentModeAspectFill
-                                              options:nil];
+                                              options:option];
         
         self.previousPreheatRect = preheatRect;
     }
 }
 
+
+/**
+ compute difference between the two rect and get the which rect should be added and get which rect should be remove
+ 
+ @param oldRect oldRect
+ @param newRect newRect
+ @param removedHandler remove handle
+ @param addedHandler add handle
+ */
 - (void)computeDifferenceBetweenRect:(CGRect)oldRect andRect:(CGRect)newRect removedHandler:(void (^)(CGRect removedRect))removedHandler addedHandler:(void (^)(CGRect addedRect))addedHandler
 {
     if (CGRectIntersectsRect(newRect, oldRect)) {
@@ -433,6 +443,13 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     }
 }
 
+
+/**
+ assets at the indexPaths
+
+ @param indexPaths indexpaths
+ @return the assets at the indexPaths
+ */
 - (NSArray *)assetsAtIndexPaths:(NSArray *)indexPaths
 {
     if (indexPaths.count == 0) { return nil; }
@@ -444,5 +461,107 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     }
     return assets;
 }
+
+
+#pragma mark-
+#pragma mark- Getters && Setters
+- (HJGridView *)gridView {
+    if (!_gridView) {
+        _gridView = [[HJGridView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)];
+        _gridView.collectionView.dataSource = self;
+        _gridView.collectionView.delegate = self;
+        _gridView.collectionView.allowsMultipleSelection = self.imagePickerType;
+        [_gridView.collectionView registerClass:[HJGridViewCell class] forCellWithReuseIdentifier:kPhotoCellID];
+    }
+    return _gridView;
+}
+
+- (HJAlbumView *)albumView {
+    if (!_albumView) {
+        _albumView = [[HJAlbumView alloc] initWithFrame:CGRectMake(0, -KScreenHeight + 64, KScreenWidth, KScreenHeight - 64)];
+        _albumView.tableView.delegate = self;
+        _albumView.tableView.dataSource = self;
+        
+    }
+    return _albumView;
+
+}
+
+- (HJNavigationView *)navigationView {
+    if (!_navigationView) {
+        _navigationView = [HJNavigationView new];
+        
+    }
+    return _navigationView;
+
+}
+
+
+- (NSArray *)albumsArr {
+    if (!_albumsArr) {
+        _albumsArr = [NSArray array];
+    }
+    return _albumsArr;
+
+}
+
+- (NSArray *)imageAssetsArrs {
+    if (!_imageAssetsArrs) {
+        _imageAssetsArrs = [NSArray array];
+    }
+    return _imageAssetsArrs;
+
+}
+
+- (NSMutableArray *)selectedImageArr {
+    if (!_selectedImageArr) {
+        _selectedImageArr = [[NSMutableArray alloc] init];
+    }
+    return _selectedImageArr;
+
+}
+
+- (PHCachingImageManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [[PHCachingImageManager alloc] init];
+    }
+    return _imageManager;
+}
+
+- (NSArray *)mediaType {
+    if (!_mediaType) {
+        _mediaType = @[@(PHAssetMediaTypeImage)];
+    }
+    return _mediaType;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+   // [self updateCachedAssets];
+}
+#pragma mark-
+#pragma mark- SetupConstraints
+- (void)setupSubviewsContraints {
+    [self.navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).offset(0.f);
+        make.left.right.equalTo(self.view);
+        make.height.mas_equalTo(64.f);
+    }];
+    
+    
+    
+//    [self.gridView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.navigationView.mas_bottom);
+//        make.left.right.bottom.equalTo(self.view);
+//    }];
+//    
+//    [self.albumView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.gridView);
+//    }];
+    
+    
+}
+
+
+
 
 @end

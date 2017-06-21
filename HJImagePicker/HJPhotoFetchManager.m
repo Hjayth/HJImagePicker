@@ -28,15 +28,16 @@
 }
 
 
-- (NSArray<PHAssetCollection *> *)fetchAssetCollections {
+- (NSArray *)fetchAssetCollections {
   
     
     //smaralbums
     PHFetchResult * smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
     NSMutableArray * fetchCollections = [NSMutableArray arrayWithCapacity:0];
-    
+    NSArray * mediaType = @[@(PHAssetMediaTypeImage)];
     // fetch all photo
         PHFetchOptions *options = [[PHFetchOptions alloc] init];
+    options.predicate = [NSPredicate predicateWithFormat:@"mediaType in %@", mediaType];
         options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
         PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsWithOptions:options];
     NSDictionary * dic = @{@"title":@"全部照片",@"fetchResult":assetsFetchResult};
@@ -71,7 +72,7 @@
         if ([collection isKindOfClass:[PHAssetCollection class]] && ![collection.localizedTitle isEqualToString:@"Videos"])
         {
             PHFetchOptions *options = [[PHFetchOptions alloc] init];
-            
+            options.predicate = [NSPredicate predicateWithFormat:@"mediaType in %@", mediaType];
             PHAssetCollection *assetCollection = (PHAssetCollection *)collection;
             PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
             if (assetsFetchResult.count > 0) {
@@ -83,7 +84,7 @@
         }
     }
 
-    [self fetchPhotosWithAssetCollectionFetchResult:fetchCollections[0][@"fetchResult"]];
+   // [self fetchPhotosWithAssetCollectionFetchResult:fetchCollections[0][@"fetchResult"]];
     return fetchCollections;
 }
 
@@ -91,18 +92,9 @@
 - (NSMutableArray<UIImage *> *)fetchPhotosWithAssetCollectionFetchResult:(PHFetchResult *)fetchResult {
     
    __block NSMutableArray * imageArr = [NSMutableArray arrayWithCapacity:0];
+//[PHAsset fetchAssetsInAssetCollection:<#(nonnull PHAssetCollection *)#> options:<#(nullable PHFetchOptions *)#>]
+    return nil;
     
-    
-    [fetchResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        PHAsset * asset = (PHAsset *) obj;
-        PHCachingImageManager * manager = [[PHCachingImageManager alloc] init];
-     [manager requestImageForAsset:asset targetSize:CGSizeMake(330.f, 330.f) contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-        // [imageArr addObject:result];
-     }];
-        
-        
-    }];
-    return imageArr;
 }
 
 
@@ -116,6 +108,38 @@
     }];
     return image;
 
+}
+
+- (NSMutableArray *)getAllPhoto{
+    NSMutableArray *arr = [NSMutableArray array];
+    // 所有智能相册
+    PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    for (NSInteger i = 0; i < smartAlbums.count; i++) {
+        PHCollection *collection = smartAlbums[i];
+        //遍历获取相册
+        if ([collection isKindOfClass:[PHAssetCollection class]]) {
+            PHAssetCollection *assetCollection = (PHAssetCollection *)collection;
+            PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+            PHAsset *asset = nil;
+            if (fetchResult.count != 0) {
+                for (NSInteger j = 0; j < fetchResult.count; j++) {
+                    //从相册中取出照片
+                    asset = fetchResult[j];
+                    PHImageRequestOptions *opt = [[PHImageRequestOptions alloc]init];
+                    opt.synchronous = YES;
+                    PHImageManager *imageManager = [[PHImageManager alloc] init];
+                    [imageManager requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFill options:opt resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                        if (result) {
+                            [arr addObject:result];
+                        }
+                    }];
+                }
+            }
+        }
+    }
+    
+    //返回所有照片
+    return arr;
 }
 
 

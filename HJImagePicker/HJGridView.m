@@ -29,8 +29,13 @@
     self.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.collectionView];
     [self addSubview:self.bottomView];
+    
+}
+
+- (void)layoutSubviews {
     [self setupSubviewsContraints];
 }
+
 
 #pragma mark-
 #pragma mark- <#代理类名#> delegate
@@ -57,7 +62,9 @@
         HJCollectionViewFlowLayout * layout = [HJCollectionViewFlowLayout new];
         layout.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3.f,[UIScreen mainScreen].bounds.size.width / 3.f );;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
+        
         _collectionView.backgroundColor = [UIColor clearColor];
+        
     }
     return _collectionView;
 
@@ -77,7 +84,7 @@
 - (void)setupSubviewsContraints {
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
-        make.height.mas_equalTo(70.f);
+        make.height.mas_equalTo(50.f);
     }];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {

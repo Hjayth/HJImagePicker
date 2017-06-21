@@ -30,6 +30,10 @@ typedef void(^confirmBlock)();
  */
 @property (nonatomic , strong) UIButton * confirmBut;
 
+/**
+ selectedCountLabel
+ */
+@property (nonatomic , strong) UILabel * selectedCountLabel;
 
 /**
  confim

@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "HJImagePickerViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <HJImagePickerDelegate>
 
 @end
 
@@ -32,9 +32,26 @@
 - (void)pushPhotoView {
  
     HJImagePickerViewController * hjVC = [[HJImagePickerViewController alloc] init];
+    hjVC.delegate = self;
+    hjVC.imagePickerType = HJImagePickerSelectedTypeMulti;
+    hjVC.photoSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3.f, [UIScreen mainScreen].bounds.size.width / 3.f);
     [self.navigationController pushViewController:hjVC
                                          animated:YES];
     
+}
+
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectedImages:(NSArray *)imagesArr {
+    NSArray * arr = imagesArr;
+    
+}
+
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectedImageAssets:(NSArray<PHAsset *> *)imageAssets {
+    
+}
+
+- (void)didCancelimagePicker:(HJImagePickerViewController *)imagePicker
+{
+
 }
 
 - (void)didReceiveMemoryWarning {

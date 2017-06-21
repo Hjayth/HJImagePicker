@@ -17,7 +17,7 @@
 /**
  @bref album coverImage
  */
-@property (nonatomic , strong) UIImage * albumCoverImage;
+@property (nonatomic , assign) UIImage * albumCoverImage;
 
 
 /**
@@ -33,5 +33,10 @@
 
 
 @property (nonatomic , strong) NSDictionary * albumInfo;
+
+/**
+ *@bref album coverImage
+ */
+@property (nonatomic , strong) UIImageView * coverImageView;
 
 @end

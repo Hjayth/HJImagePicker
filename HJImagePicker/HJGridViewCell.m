@@ -12,7 +12,7 @@
 
 @interface  HJGridViewCell ()
 
-@property (nonatomic , strong) UIImageView * photoImageView;
+
 
 @property (nonatomic , strong) UIImageView * maskView;
 
@@ -29,20 +29,25 @@
 
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self configureUIAppearance];
+- (id)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self configureUIAppearance];
+
+    }
+    return self;
 
 }
+
+
 
 #pragma mark-
 #pragma mark- configureUIAppearance 
 - (void)configureUIAppearance {
     self.unselectedImage = [UIImage imageNamed:@"imagePicker_checkbox"];
-    self.selectedImage = [UIImage imageNamed:@"imagePicker_add"];
+    self.selectedImage = [UIImage imageNamed:@"imagePicker_checkboxCur"];
     [self.contentView addSubview:self.photoImageView];
   //  [self.contentView addSubview:self.maskView];
-    self.isChosed = NO;
+  //  self.isChosed = NO;
     [self.contentView addSubview:self.choseImageView];
     [self setupSubviewsContraints];
 
@@ -63,6 +68,10 @@
 - (UIImageView *)photoImageView {
     if (!_photoImageView) {
         _photoImageView = [UIImageView new];
+        _photoImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _photoImageView.clipsToBounds = YES;
+        _photoImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        _photoImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
     return _photoImageView;
 
@@ -101,24 +110,14 @@
 
 }
 
-- (void)setPhotoAsset:(PHAsset *)photoAsset {
-    _photoAsset = photoAsset;
-   self.photoImageView.image =  [[HJPhotoFetchManager shareManager] fetchImageWithAsset:_photoAsset withSize:CGSizeMake(self.frame.size.width / 3.f, self.frame.size.width / 3.f)];
-
-}
-
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    self.choseImageView.selected = YES;
+    self.choseImageView.selected = selected;
     
 }
 
-- (void)setIsChosed:(BOOL)isChosed {
-    _isChosed = isChosed;
-    self.choseImageView.selected = isChosed;
-    
-}
+
 #pragma mark-
 #pragma mark- SetupConstraints
 - (void)setupSubviewsContraints {

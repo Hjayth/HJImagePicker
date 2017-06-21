@@ -10,6 +10,7 @@
 #import <Photos/Photos.h>
 #import <Masonry.h>
 
+
 static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 
 @interface HJAlbumTableViewCell ()
@@ -24,10 +25,10 @@ static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
  */
 @property (nonatomic , strong) UILabel * countLabel;
 
-/**
- *@bref album coverImage
- */
-@property (nonatomic , strong) UIImageView * coverImageView;
+
+
+@property (nonatomic , strong) PHCachingImageManager * imageManager;
+
 @end
 
 @implementation HJAlbumTableViewCell
@@ -36,6 +37,7 @@ static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 #pragma mark- View Life Cycle
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [self configureUIAppearance];
     }
     return self;
@@ -88,7 +90,11 @@ static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 - (UIImageView *)coverImageView {
     if (!_coverImageView) {
         _coverImageView = [UIImageView new];
-        _coverImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _coverImageView.layer.cornerRadius = 3;
+        _coverImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverImageView.clipsToBounds = YES;
+        _coverImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        _coverImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         
     }
     return _coverImageView;
@@ -121,18 +127,21 @@ static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
     __weak typeof(self)kWeakSelf = self;
     self.titleLabel.text = _albumInfo[@"title"];
     PHFetchResult * result = _albumInfo[@"fetchResult"];
-    PHAsset * asset =(PHAsset *) [result objectAtIndex:0];
-    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:kAlbumCoverImageSize contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-        kWeakSelf.coverImageView.image = result;
-    }];
+    self.albumImageCount = result.count;
+//    PHAsset * asset =(PHAsset *) [result objectAtIndex:0];
+//    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:kAlbumCoverImageSize contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+//        kWeakSelf.coverImageView.image = result;
+//    }];
 }
 #pragma mark-
 #pragma mark- SetupConstraints
 - (void)setupSubviewsContraints {
     [self.coverImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView);
-        make.leading.equalTo(self.contentView.mas_leading).offset(15.f);
-        make.height.width.mas_equalTo(44.f);
+        make.left.equalTo(self.contentView.mas_left).offset(15.f);
+      //  make.leading.equalTo(self.contentView.mas_leading).offset(15.f);
+        make.height.mas_equalTo(44.f);
+        make.width.mas_equalTo(44.f);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

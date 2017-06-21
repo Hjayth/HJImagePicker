@@ -32,4 +32,5 @@
  ImagePickerBottomView
  */
 @property (nonatomic , strong) HJImagePickerBottomView * bottomView;
+
 @end

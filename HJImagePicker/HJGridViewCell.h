@@ -18,7 +18,7 @@
 /**
  photo
  */
-@property (nonatomic , strong) UIImage * photo;
+@property (nonatomic , assign) UIImage * photo;
 
 /**
  mask image
@@ -35,10 +35,13 @@
 /**
  photo UNSelected status image
  */
-@property (nonatomic , strong) UIImage * unselectedImage;
+@property (nonatomic , assign) UIImage * unselectedImage;
 
-@property (nonatomic , getter=isChose) BOOL isChosed;
 
-@property (nonatomic ,strong) PHAsset * photoAsset;
+@property (nonatomic , strong) UIImageView * photoImageView;
 
+/**
+ photoAsset
+ */
+@property (nonatomic , assign) PHAsset * photoAsset;
 @end
