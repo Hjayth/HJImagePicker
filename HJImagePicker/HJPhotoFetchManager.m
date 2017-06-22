@@ -28,42 +28,25 @@
 }
 
 
+/**
+ fetch asset collections
+
+ @return <#return value description#>
+ */
 - (NSArray *)fetchAssetCollections {
-  
-    
+ 
     //smaralbums
     PHFetchResult * smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
     NSMutableArray * fetchCollections = [NSMutableArray arrayWithCapacity:0];
     NSArray * mediaType = @[@(PHAssetMediaTypeImage)];
     // fetch all photo
         PHFetchOptions *options = [[PHFetchOptions alloc] init];
+    //predicate limit the mediaType and sort by createDate
     options.predicate = [NSPredicate predicateWithFormat:@"mediaType in %@", mediaType];
         options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
         PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsWithOptions:options];
     NSDictionary * dic = @{@"title":@"全部照片",@"fetchResult":assetsFetchResult};
         [fetchCollections addObject:dic];
-
-
-    
-//   fetch folder user album
-//  PHFetchResult * albumResult =  [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
-//    
-//    
-//    for(PHCollection *collection in albumResult)
-//    {
-//        if ([collection isKindOfClass:[PHAssetCollection class]])
-//        {
-//            PHFetchOptions *options = [[PHFetchOptions alloc] init];
-//            //  options.predicate = [NSPredicate predicateWithFormat:@"mediaType in %@", PHAssetMediaTypeImage];
-//            PHAssetCollection *assetCollection = (PHAssetCollection *)collection;
-//            
-//            //Albums collections are allways PHAssetCollectionType=1 & PHAssetCollectionSubtype=2
-//            
-//            PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
-//            [arr addObject:assetsFetchResult];
-//            
-//        }
-//    }
 
     
     // fetch the smartAlbums
@@ -83,22 +66,25 @@
             }
         }
     }
-
-   // [self fetchPhotosWithAssetCollectionFetchResult:fetchCollections[0][@"fetchResult"]];
     return fetchCollections;
 }
 
 
 - (NSMutableArray<UIImage *> *)fetchPhotosWithAssetCollectionFetchResult:(PHFetchResult *)fetchResult {
     
-   __block NSMutableArray * imageArr = [NSMutableArray arrayWithCapacity:0];
-//[PHAsset fetchAssetsInAssetCollection:<#(nonnull PHAssetCollection *)#> options:<#(nullable PHFetchOptions *)#>]
     return nil;
     
 }
 
 
 
+/**
+ fetch the image use asset and  image size
+
+ @param asset PHAsset
+ @param size image size
+ @return image
+ */
 - (UIImage *)fetchImageWithAsset:(PHAsset *)asset withSize:(CGSize )size{
    __block UIImage * image ;
     PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
@@ -110,6 +96,12 @@
 
 }
 
+
+/**
+ fetch all photo
+
+ @return all photos
+ */
 - (NSMutableArray *)getAllPhoto{
     NSMutableArray *arr = [NSMutableArray array];
     // 所有智能相册

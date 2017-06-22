@@ -10,6 +10,8 @@
 
 @class HJNavigationView;
 @class HJImagePickerBottomView;
+@class HJImagePickerViewController;
+
 /**
  show photo gridView
  */
@@ -32,5 +34,10 @@
  ImagePickerBottomView
  */
 @property (nonatomic , strong) HJImagePickerBottomView * bottomView;
+
+/**
+ imagePickerType
+ */
+@property (nonatomic , assign) int isAllowMulti;
 
 @end

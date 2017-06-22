@@ -10,7 +10,7 @@
 #import <Photos/Photos.h>
 #import <Masonry.h>
 
-
+//album cover image size
 static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 
 @interface HJAlbumTableViewCell ()

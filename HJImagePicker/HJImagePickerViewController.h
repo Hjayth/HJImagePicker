@@ -14,19 +14,19 @@
 /**
  imagePicker  image  selcted type
 
- - HJImagePickerSelectedSingle: chose singel image
- - HJImagePickerSelectedMulti: chose multi images
+ - HJImagePickerTpyeSingleSelection: chose singel image
+ - HJImagePickerTypeMultiSelection: chose multi images
  */
-typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
+typedef  NS_ENUM(NSInteger,HJImagePickerType){
     /**
      chose singel image
      */
-    HJImagePickerSelectedTpyeSingle = 0,
+    HJImagePickerTpyeSingleSelection = 0,
     
     /**
      chose multi images
      */
-    HJImagePickerSelectedTypeMulti = 1,
+    HJImagePickerTypeMultiSelection = 1,
  
 };
 
@@ -42,7 +42,7 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
  @param imagesArr  image in the imagesArr is kind of uiimage
  */
 - (void)imagePicker:(HJImagePickerViewController *)imagePicker
-       selectedImages:(NSArray *)imagesArr;
+       didFinishedSelectedImages:(NSArray *)imagesArr;
 
 
 /**
@@ -51,7 +51,7 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
  @param imagePicker imagePicker
  @param imageAssets image in the imageAssets is kind of PHAsset,you shoulde use PHImageManager to fetch the image
  */
-- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectedImageAssets:(NSArray <PHAsset *> *)imageAssets;
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker didFinishedSelectedImageAssets:(NSArray <PHAsset *> *)imageAssets;
 
 /**
  cancel choice and go back last vc
@@ -64,13 +64,11 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
 
 @interface HJImagePickerViewController : UIViewController
 
-@property (nonatomic , weak ) id <HJImagePickerDelegate> delegate;
-
 
 /**
- image  selcted type
+ HJImagePickerDelegate
  */
-@property (nonatomic , assign) HJImagePickerSelectedType * imagePickerSelectedType;
+@property (nonatomic , weak ) id <HJImagePickerDelegate> delegate;
 
 /**
  limit multi image selected count
@@ -101,7 +99,27 @@ typedef  NS_ENUM(NSInteger,HJImagePickerSelectedType){
 @property (nonatomic , assign) CGSize photoSize;
 
 
+/**
+ the imagePicker include the media types
+ */
 @property (nonatomic , strong) NSArray * mediaType;
 
-@property (nonatomic , assign) HJImagePickerSelectedType  imagePickerType;
+
+
+/**
+ imagePickerType
+ */
+@property (nonatomic , assign) HJImagePickerType  imagePickerType;
+
+
+
+/**
+ init method
+
+ @param imagePickerType imagePickerType
+ @return HJImagePickerViewController instance
+ */
+- (HJImagePickerViewController *)initWithImagePickerType:(HJImagePickerType)imagePickerType;
+
+
 @end

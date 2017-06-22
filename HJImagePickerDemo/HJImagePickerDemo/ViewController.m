@@ -33,21 +33,23 @@
  
     HJImagePickerViewController * hjVC = [[HJImagePickerViewController alloc] init];
     hjVC.delegate = self;
-    hjVC.imagePickerType = HJImagePickerSelectedTypeMulti;
     hjVC.photoSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3.f, [UIScreen mainScreen].bounds.size.width / 3.f);
     [self.navigationController pushViewController:hjVC
                                          animated:YES];
     
 }
 
-- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectedImages:(NSArray *)imagesArr {
-    NSArray * arr = imagesArr;
-    
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker didFinishedSelectedImages:(NSArray *)imagesArr {
+
+
 }
 
-- (void)imagePicker:(HJImagePickerViewController *)imagePicker selectedImageAssets:(NSArray<PHAsset *> *)imageAssets {
-    
+
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker didFinishedSelectedImageAssets:(NSArray<PHAsset *> *)imageAssets {
+
 }
+
+
 
 - (void)didCancelimagePicker:(HJImagePickerViewController *)imagePicker
 {

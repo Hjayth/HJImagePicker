@@ -9,36 +9,30 @@
 #import "HJGridViewCell.h"
 #import <Masonry.h>
 #import "HJPhotoFetchManager.h"
+#import "HJImagePickerViewController.h"
 
 @interface  HJGridViewCell ()
 
+/**
+ maskView
+ */
+@property (nonatomic , strong) UIView * maskView;
 
-
-@property (nonatomic , strong) UIImageView * maskView;
-
+/**
+ selectedStatus imageView
+ */
 @property (nonatomic , strong) UIButton * choseImageView;
 
 @end
 
 @implementation HJGridViewCell
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self configureUIAppearance];
-    }
-    return self;
-
-}
-
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self configureUIAppearance];
-
     }
     return self;
 
 }
-
-
 
 #pragma mark-
 #pragma mark- configureUIAppearance 
@@ -46,8 +40,7 @@
     self.unselectedImage = [UIImage imageNamed:@"imagePicker_checkbox"];
     self.selectedImage = [UIImage imageNamed:@"imagePicker_checkboxCur"];
     [self.contentView addSubview:self.photoImageView];
-  //  [self.contentView addSubview:self.maskView];
-  //  self.isChosed = NO;
+    [self.contentView addSubview:self.maskView];
     [self.contentView addSubview:self.choseImageView];
     [self setupSubviewsContraints];
 
@@ -90,31 +83,34 @@
 
 }
 
-- (UIImageView *)maskView {
+- (UIView *)maskView {
     if (!_maskView) {
-        _maskView = [UIImageView new];
+        _maskView = [UIView new];
+        _maskView.hidden = YES;
     }
     return _maskView;
 
 }
 
--(void)setPhoto:(UIImage *)photo {
-    _photo = photo;
-    self.photoImageView.image = _photo;
-
+- (void)setImagePickerType:(BOOL)imagePickerType {
+    if (!imagePickerType) {
+        self.maskView.hidden = YES;
+        self.choseImageView.hidden = YES;
+    }
 }
 
 -(void)setMaskImage:(UIImage *)maskImage {
     _maskImage = maskImage;
-    self.maskView.image = _maskImage;
+  //  self.maskView.image = _maskImage;
 
 }
+
 
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     self.choseImageView.selected = selected;
-    
+    self.maskView.hidden = selected;
 }
 
 
@@ -122,6 +118,10 @@
 #pragma mark- SetupConstraints
 - (void)setupSubviewsContraints {
     [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    
+    [self.maskView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
     

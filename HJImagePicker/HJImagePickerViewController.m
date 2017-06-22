@@ -25,7 +25,11 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 #define kHJWeakSelf(weakSelf) __weak typeof(self) (weakSelf) = self
 
 
-//Helper methods
+#pragma mark-
+#pragma mark- Helper methods
+/**
+ get the indexPaths in the section
+ */
 @implementation NSIndexSet (Convenience)
 - (NSArray *)aapl_indexPathsFromIndexesWithSection:(NSUInteger)section {
     NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:self.count];
@@ -36,6 +40,9 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 }
 @end
 
+/**
+ get the indexpath in the rect
+ */
 @implementation UICollectionView (Convenience)
 - (NSArray *)aapl_indexPathsForElementsInRect:(CGRect)rect {
     NSArray *allLayoutAttributes = [self.collectionViewLayout layoutAttributesForElementsInRect:rect];
@@ -49,7 +56,6 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 }
 @end
 
-
 @interface HJImagePickerViewController ()
 <
     UITableViewDelegate,
@@ -58,50 +64,33 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     UICollectionViewDataSource
 >
 
-
 @property CGRect previousPreheatRect;
 
-/**
- photo album  list view
- */
+//photo album  list view
 @property (nonatomic  , strong) HJAlbumView * albumView;
 
-
-/**
- photo list view
- */
+// photo list view
 @property (nonatomic , strong) HJGridView * gridView;
 
-
-/**
- navigationView
- */
+// navigationView
 @property (nonatomic , strong) HJNavigationView * navigationView;
 
-
-/**
-  album array
- */
+//  album array
 @property (nonatomic , strong) NSArray * albumsArr;
 
+// the fetchResult
+@property (nonatomic , strong) PHFetchResult * fetchResult;
 
-/**
- image assets array
- */
-@property (nonatomic , strong) NSArray * imageAssetsArrs;
+// selectedAssetsArr
+@property (nonatomic , strong) NSMutableArray * selectedAssetsArr;
 
-
-/**
- selectedImageArr;
- */
+// selectedImageArr;
 @property (nonatomic , strong) NSMutableArray * selectedImageArr;
 
-
-/**
- selectedAlbumInfo
- */
+// selectedAlbumInfo
 @property (nonatomic , strong) NSDictionary * selectedAlbumInfo;
 
+//phcancheImageManager request for the image (Photo.kit)
 @property (nonatomic , strong) PHCachingImageManager * imageManager;
 
 @end
@@ -110,6 +99,20 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 
 #pragma mark-
 #pragma mark- View Life Cycle
+- (HJImagePickerViewController *)initWithImagePickerType:(HJImagePickerType)imagePickerType {
+    if (self = [super init]) {
+        self.imagePickerType = imagePickerType;
+    }
+    return self;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        self.imagePickerType = HJImagePickerTypeMultiSelection;
+    }
+    return self;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.navigationController) {
@@ -138,6 +141,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 #pragma mark- configureUIAppearance 
 - (void)configureUIAppearance {
     self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.gridView];
     [self.view addSubview:self.albumView];
     [self.view addSubview:self.navigationView];
@@ -147,11 +151,14 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
         
         [weakSelf backToTheLastView];
         
-        if ([weakSelf.delegate respondsToSelector:@selector(imagePicker:selectedImages:)]) {
-            [weakSelf.delegate imagePicker:self selectedImageAssets:self.selectedImageArr];
+        if ([weakSelf.delegate respondsToSelector:@selector(imagePicker:didFinishedSelectedImageAssets:)]) {
+            [weakSelf.delegate imagePicker:self didFinishedSelectedImageAssets:self.selectedAssetsArr];
+        }
+        
+        if ([weakSelf.delegate respondsToSelector:@selector(imagePicker:didFinishedSelectedImages:) ]) {
+            [weakSelf.delegate imagePicker:self didFinishedSelectedImages:self.selectedImageArr];
         }
     }];
-    
     [self.navigationView.centernItem addTarget:self action:@selector(navCenterItemAction:) forControlEvents:UIControlEventTouchUpInside];
     [self setupSubviewsContraints];
     [self resetCachedAssets];
@@ -190,6 +197,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedAlbumInfo = self.albumsArr[indexPath.row];
+    self.fetchResult = self.selectedAlbumInfo[@"fetchResult"];
     [self updateNavTitle];
     [self updatePhotoData];
     kHJWeakSelf(weakSelf);
@@ -200,39 +208,32 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     
 }
 
-
-
 #pragma mark-
 #pragma mark- collectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    PHFetchResult * result = self.selectedAlbumInfo[@"fetchResult"];
-    return result.count;
+    return self.fetchResult.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HJGridViewCell * photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:kPhotoCellID forIndexPath:indexPath];
-   // photoCell.photo = self.imageAssetsArrs[indexPath.row];
-   // photoCell.photo = self.imageAssetsArrs[indexPath.row];
+    photoCell.imagePickerType = self.imagePickerType;
     NSInteger currentTag = photoCell.tag + 1;
     photoCell.tag = currentTag;
-   // PHAsset *asset = self.assetsFetchResults[indexPath.item];
-    PHAsset * asset = self.selectedAlbumInfo[@"fetchResult"][indexPath.row];
-    PHImageRequestOptions * option = [[PHImageRequestOptions alloc] init];
-    option.networkAccessAllowed = YES;
-    option.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
+    PHAsset * asset = self.fetchResult[indexPath.row];
     photoCell.photoAsset = asset;
     [self.imageManager requestImageForAsset:asset
                                  targetSize:CGSizeMake(123.f,123.f)
                                 contentMode:PHImageContentModeAspectFill
-                                    options:option
+                                    options:nil
                               resultHandler:^(UIImage *result, NSDictionary *info) {
                                   
                                   // Only update the thumbnail if the cell tag hasn't changed. Otherwise, the cell has been re-used.
                                   if (photoCell.tag == currentTag) {
                                       [photoCell.photoImageView setImage:result];
-                                
                                   }
+    
                               }];
+    
     if ([self.selectedImageArr containsObject:photoCell.photo]) {
         photoCell.selected = YES;
         [self.gridView.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
@@ -245,13 +246,37 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     HJGridViewCell * cell = (HJGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [self.selectedImageArr addObject:cell.photoAsset];
+    [self.selectedAssetsArr addObject:cell.photoAsset];
+    [self.selectedImageArr addObject:cell.photoImageView.image];
+    switch (self.imagePickerType) {
+        case HJImagePickerTpyeSingleSelection:
+        {
+                if ([self.delegate respondsToSelector:@selector(imagePicker:didFinishedSelectedImageAssets:)]) {
+                    [self.delegate imagePicker:self didFinishedSelectedImageAssets:self.selectedAssetsArr];
+                }
+                
+                if ([self.delegate respondsToSelector:@selector(imagePicker:didFinishedSelectedImages:) ]) {
+                    [self.delegate imagePicker:self didFinishedSelectedImages:self.selectedImageArr];
+                }
+            [self backToTheLastView];
+            
+        }
+            break;
+            
+       case  HJImagePickerTypeMultiSelection:
+        {
+            
+        }
+            break;
+    }
+    
     self.gridView.bottomView.count = self.selectedImageArr.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
      HJGridViewCell * cell = (HJGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [self.selectedImageArr removeObject:cell.photo];
+    [self.selectedAssetsArr removeObject:cell.photoAsset];
+    [self.selectedImageArr removeObject:cell.photoImageView.image];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.gridView.collectionView) {
@@ -281,9 +306,8 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
  @param sender navCenterItem
  */
 - (void)navCenterItemAction:(UIButton *)sender {
+   [self pullDownViewShow:sender.selected];
     sender.selected = !sender.selected;
-    [self pullDownViewShow:sender.selected];
-
 }
 #pragma mark-
 #pragma mark- Private Methods
@@ -294,6 +318,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 - (void)fetchPhotoData {
     self.albumsArr = [[HJPhotoFetchManager shareManager] fetchAssetCollections];
     self.selectedAlbumInfo = self.albumsArr[0];
+    self.fetchResult = self.selectedAlbumInfo[@"fetchResult"];
     [self.navigationView.centernItem setTitle:self.albumsArr[0][@"title"] forState:UIControlStateNormal];
     [self updateCachedAssets];
 }
@@ -468,20 +493,22 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 - (HJGridView *)gridView {
     if (!_gridView) {
         _gridView = [[HJGridView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)];
+        
         _gridView.collectionView.dataSource = self;
         _gridView.collectionView.delegate = self;
         _gridView.collectionView.allowsMultipleSelection = self.imagePickerType;
+        _gridView.isAllowMulti= self.imagePickerType;
         [_gridView.collectionView registerClass:[HJGridViewCell class] forCellWithReuseIdentifier:kPhotoCellID];
+        
     }
     return _gridView;
 }
 
 - (HJAlbumView *)albumView {
     if (!_albumView) {
-        _albumView = [[HJAlbumView alloc] initWithFrame:CGRectMake(0, -KScreenHeight + 64, KScreenWidth, KScreenHeight - 64)];
+        _albumView = [[HJAlbumView alloc] initWithFrame:CGRectMake(0, -KScreenHeight +64, KScreenWidth, KScreenHeight - 64)];
         _albumView.tableView.delegate = self;
         _albumView.tableView.dataSource = self;
-        
     }
     return _albumView;
 
@@ -490,7 +517,6 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 - (HJNavigationView *)navigationView {
     if (!_navigationView) {
         _navigationView = [HJNavigationView new];
-        
     }
     return _navigationView;
 
@@ -505,12 +531,11 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 
 }
 
-- (NSArray *)imageAssetsArrs {
-    if (!_imageAssetsArrs) {
-        _imageAssetsArrs = [NSArray array];
+- (NSMutableArray *)selectedAssetsArr {
+    if (!_selectedAssetsArr) {
+        _selectedAssetsArr = [NSMutableArray arrayWithCapacity:10];
     }
-    return _imageAssetsArrs;
-
+    return _selectedAssetsArr;
 }
 
 - (NSMutableArray *)selectedImageArr {
@@ -535,9 +560,6 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     return _mediaType;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-   // [self updateCachedAssets];
-}
 #pragma mark-
 #pragma mark- SetupConstraints
 - (void)setupSubviewsContraints {
@@ -547,17 +569,10 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
         make.height.mas_equalTo(64.f);
     }];
     
-    
-    
-//    [self.gridView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.navigationView.mas_bottom);
-//        make.left.right.bottom.equalTo(self.view);
-//    }];
-//    
-//    [self.albumView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.gridView);
-//    }];
-    
+    [self.gridView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.navigationView.mas_bottom);
+        make.left.right.bottom.equalTo(self.view);
+    }];
     
 }
 

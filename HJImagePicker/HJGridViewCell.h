@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
+
 @interface HJGridViewCell : UICollectionViewCell
 
 /**
@@ -37,11 +38,18 @@
  */
 @property (nonatomic , assign) UIImage * unselectedImage;
 
-
+/**
+ photo ImageView
+ */
 @property (nonatomic , strong) UIImageView * photoImageView;
 
 /**
  photoAsset
  */
 @property (nonatomic , assign) PHAsset * photoAsset;
+
+/**
+ imagePickerType
+ */
+@property (nonatomic , assign) BOOL imagePickerType;
 @end

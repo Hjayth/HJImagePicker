@@ -11,7 +11,7 @@
 #import "HJNavigationView.h"
 #import "HJImagePickerBottomView.h"
 #import <Masonry.h>
-
+#import "HJImagePickerViewController.h"
 
 @implementation HJGridView
 
@@ -61,9 +61,9 @@
     if (!_collectionView) {
         HJCollectionViewFlowLayout * layout = [HJCollectionViewFlowLayout new];
         layout.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3.f,[UIScreen mainScreen].bounds.size.width / 3.f );;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
-        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor clearColor];
+        
         
     }
     return _collectionView;
@@ -79,12 +79,28 @@
 
 }
 
+- (void)setIsAllowMulti:(int)isAllowMulti {
+    _isAllowMulti = isAllowMulti;
+    if (_isAllowMulti == 0) {
+        self.bottomView.hidden = YES;
+    }
+    
+
+}
+
 #pragma mark-
 #pragma mark- SetupConstraints
 - (void)setupSubviewsContraints {
+    CGFloat height;
+    if (_isAllowMulti == 0) {
+        height = 0;
+        
+    }else {
+        height = 50.f;
+    }
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
-        make.height.mas_equalTo(50.f);
+        make.height.mas_equalTo(height);
     }];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
