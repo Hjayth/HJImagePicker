@@ -124,7 +124,7 @@ static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
 - (void)setAlbumInfo:(NSDictionary *)albumInfo {
     _albumInfo = albumInfo;
     
-    __weak typeof(self)kWeakSelf = self;
+  
     self.titleLabel.text = _albumInfo[@"title"];
     PHFetchResult * result = _albumInfo[@"fetchResult"];
     self.albumImageCount = result.count;
@@ -139,7 +139,6 @@ static CGSize const kAlbumCoverImageSize = {44.f, 44.f};
     [self.coverImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView);
         make.left.equalTo(self.contentView.mas_left).offset(15.f);
-      //  make.leading.equalTo(self.contentView.mas_leading).offset(15.f);
         make.height.mas_equalTo(44.f);
         make.width.mas_equalTo(44.f);
     }];

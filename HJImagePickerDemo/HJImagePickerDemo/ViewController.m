@@ -31,11 +31,12 @@
 
 - (void)pushPhotoView {
  
-    HJImagePickerViewController * hjVC = [[HJImagePickerViewController alloc] init];
+    HJImagePickerViewController * hjVC = [[HJImagePickerViewController alloc] initWithImagePickerType:HJImagePickerTpyeSingleSelection];
     hjVC.delegate = self;
-    hjVC.photoSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3.f, [UIScreen mainScreen].bounds.size.width / 3.f);
-    [self.navigationController pushViewController:hjVC
-                                         animated:YES];
+   // hjVC.photoSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3.f, [UIScreen mainScreen].bounds.size.width / 3.f);
+    [self.navigationController presentViewController:hjVC animated:YES completion:nil];
+   // [self.navigationController pushViewController:hjVC
+//                                        animated:YES];
     
 }
 
@@ -53,7 +54,7 @@
 
 - (void)didCancelimagePicker:(HJImagePickerViewController *)imagePicker
 {
-
+    
 }
 
 - (void)didReceiveMemoryWarning {

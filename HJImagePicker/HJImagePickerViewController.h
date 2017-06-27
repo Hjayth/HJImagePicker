@@ -35,6 +35,8 @@ typedef  NS_ENUM(NSInteger,HJImagePickerType){
 @protocol HJImagePickerDelegate <NSObject>;
 
 
+@required
+
 /**
  confim the selectedImages to the DelegateVC
  
@@ -45,13 +47,7 @@ typedef  NS_ENUM(NSInteger,HJImagePickerType){
        didFinishedSelectedImages:(NSArray *)imagesArr;
 
 
-/**
- confim the selectedImages to the DelegateVC
 
- @param imagePicker imagePicker
- @param imageAssets image in the imageAssets is kind of PHAsset,you shoulde use PHImageManager to fetch the image
- */
-- (void)imagePicker:(HJImagePickerViewController *)imagePicker didFinishedSelectedImageAssets:(NSArray <PHAsset *> *)imageAssets;
 
 /**
  cancel choice and go back last vc
@@ -59,6 +55,17 @@ typedef  NS_ENUM(NSInteger,HJImagePickerType){
  @param imagePicker imagePicker
  */
 - (void)didCancelimagePicker:(HJImagePickerViewController *)imagePicker;
+
+
+@optional
+
+/**
+ confim the selectedImages to the DelegateVC
+ 
+ @param imagePicker imagePicker
+ @param imageAssets image in the imageAssets is kind of PHAsset,you shoulde use PHImageManager to fetch the image
+ */
+- (void)imagePicker:(HJImagePickerViewController *)imagePicker didFinishedSelectedImageAssets:(NSArray <PHAsset *> *)imageAssets;
 
 @end
 

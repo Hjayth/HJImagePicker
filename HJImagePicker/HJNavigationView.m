@@ -88,6 +88,7 @@
         _leftNavItem = [UIButton new];
         [_leftNavItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_leftNavItem setTitle:@"取消" forState:UIControlStateNormal];
+        _leftNavItem.hidden = YES;
     }
     return _leftNavItem;
 
@@ -112,14 +113,13 @@
         make.centerY.equalTo(self.centernItem.mas_centerY);
         make.left.equalTo(self.mas_left).offset(15.f);
         make.height.mas_equalTo(16.f);
-        make.width.mas_equalTo(40.f);
+       
     }];
     
     [self.rightItem mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.centernItem.mas_centerY);
         make.right.equalTo(self.mas_right).offset(-15.f);
         make.height.mas_equalTo(16.f);
-        make.width.mas_equalTo(40.f);
     }];
     
 }

@@ -143,8 +143,8 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.gridView];
-    [self.view addSubview:self.albumView];
     [self.view addSubview:self.navigationView];
+    self.navigationView.centernItem.selected = NO;
     [self.navigationView.rightItem addTarget:self action:@selector(didCancel:) forControlEvents:UIControlEventTouchUpInside];
     kHJWeakSelf(weakSelf);
     [self.gridView.bottomView confirm:^{
@@ -295,6 +295,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 - (void)didCancel:(id)sender {
     if ([self.delegate respondsToSelector:@selector(didCancelimagePicker:)]) {
         [self.delegate didCancelimagePicker:self];
+        [self backToTheLastView];
     }
 
 }
@@ -306,8 +307,9 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
  @param sender navCenterItem
  */
 - (void)navCenterItemAction:(UIButton *)sender {
-   [self pullDownViewShow:sender.selected];
     sender.selected = !sender.selected;
+   [self pullDownViewShow:sender.selected];
+    
 }
 #pragma mark-
 #pragma mark- Private Methods
@@ -341,14 +343,16 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
  */
 - (void)pullDownViewShow:(BOOL)show {
     kHJWeakSelf(weakSelf);
-    if (show) {
+    if (!show) {
        
         [UIView animateWithDuration:0.8 animations:^{
             weakSelf.albumView.frame = CGRectMake(0, -KScreenHeight + 64, KScreenWidth, KScreenHeight - 64);
         }];
+        [self.albumView removeFromSuperview];
         return;
     }
-   
+    
+    [self.view insertSubview:self.albumView belowSubview:self.navigationView];
     [UIView animateWithDuration:0.8 animations:^{
         weakSelf.albumView.frame = CGRectMake(0,  64, KScreenWidth, KScreenHeight - 64);
     }];
