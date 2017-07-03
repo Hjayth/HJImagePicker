@@ -199,6 +199,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     self.selectedAlbumInfo = self.albumsArr[indexPath.row];
     self.fetchResult = self.selectedAlbumInfo[@"fetchResult"];
     [self updateNavTitle];
+    [self navCenterItemAction:self.navigationView.centernItem];
     [self updatePhotoData];
     kHJWeakSelf(weakSelf);
     
