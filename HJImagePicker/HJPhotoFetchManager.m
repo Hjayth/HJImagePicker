@@ -89,7 +89,9 @@
    __block UIImage * image ;
     PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
     options.synchronous = YES;
-    [self.imageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    
+    
+    [self.imageManager requestImageForAsset:asset targetSize:size.width !=0 ? size: PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         image = result;
     }];
     return image;

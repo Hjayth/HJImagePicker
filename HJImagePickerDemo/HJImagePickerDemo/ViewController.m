@@ -31,7 +31,7 @@
 
 - (void)pushPhotoView {
  
-    HJImagePickerViewController * hjVC = [[HJImagePickerViewController alloc] initWithImagePickerType:HJImagePickerTpyeSingleSelection];
+    HJImagePickerViewController * hjVC = [[HJImagePickerViewController alloc] initWithImagePickerType:HJImagePickerTypeMultiSelection];
     hjVC.delegate = self;
    // hjVC.photoSize = CGSizeMake([UIScreen mainScreen].bounds.size.width / 3.f, [UIScreen mainScreen].bounds.size.width / 3.f);
     [self.navigationController presentViewController:hjVC animated:YES completion:nil];

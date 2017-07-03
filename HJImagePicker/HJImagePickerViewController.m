@@ -234,7 +234,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     
                               }];
     
-    if ([self.selectedImageArr containsObject:photoCell.photo]) {
+    if ([self.selectedAssetsArr containsObject:photoCell.photoAsset]) {
         photoCell.selected = YES;
         [self.gridView.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     }else {

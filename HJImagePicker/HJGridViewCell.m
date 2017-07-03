@@ -110,7 +110,7 @@
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     self.choseImageView.selected = selected;
-    self.maskView.hidden = selected;
+    self.maskView.hidden = !selected;
 }
 
 
