@@ -106,7 +106,7 @@
         make.centerX.equalTo(self.navView.mas_centerX);
         make.centerY.equalTo(self.navView.mas_centerY);
         make.width.mas_equalTo(160.f);
-        make.height.mas_equalTo(16.f);
+        make.height.mas_equalTo(30.f);
     }];
     
     [self.leftNavItem mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -119,7 +119,7 @@
     [self.rightItem mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.centernItem.mas_centerY);
         make.right.equalTo(self.mas_right).offset(-15.f);
-        make.height.mas_equalTo(16.f);
+        make.height.mas_equalTo(30.f);
     }];
     
 }

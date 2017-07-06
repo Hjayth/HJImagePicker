@@ -124,8 +124,9 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self fetchPhotoData];
+    [self checkAssetLibraryAuth];
     [self configureUIAppearance];
+    [self fetchPhotoData];
     
     
 }
@@ -314,6 +315,23 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 }
 #pragma mark-
 #pragma mark- Private Methods
+- (void)checkAssetLibraryAuth {
+    __weak typeof(self)weakSelf = self;
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        if (status == PHAuthorizationStatusAuthorized) {
+            [weakSelf fetchPhotoData];
+            // [weakSelf configureUIAppearance];
+        }else {
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf checkAssetLibraryAuth];
+            });
+        }
+        
+    }];
+    
+}
+
 
 /**
     fetch photo data
