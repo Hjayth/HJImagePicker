@@ -124,9 +124,15 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self checkAssetLibraryAuth];
-    [self configureUIAppearance];
-    [self fetchPhotoData];
+  [self configureUIAppearance];
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+        
+        [self fetchPhotoData];
+    }else {
+        [self checkAssetLibraryAuth];
+        
+       // [self backToTheLastView];
+    }
     
     
 }
@@ -162,7 +168,7 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     }];
     [self.navigationView.centernItem addTarget:self action:@selector(navCenterItemAction:) forControlEvents:UIControlEventTouchUpInside];
     [self setupSubviewsContraints];
-    [self resetCachedAssets];
+    
 }
 
 
@@ -323,9 +329,10 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
             // [weakSelf configureUIAppearance];
         }else {
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [weakSelf checkAssetLibraryAuth];
-            });
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [weakSelf checkAssetLibraryAuth];
+//            });
+            [self backToTheLastView];
         }
         
     }];
@@ -337,11 +344,13 @@ static  NSString * const kPhotoCellID = @"HJGridViewCell";
     fetch photo data
  */
 - (void)fetchPhotoData {
+    [self resetCachedAssets];
     self.albumsArr = [[HJPhotoFetchManager shareManager] fetchAssetCollections];
     self.selectedAlbumInfo = self.albumsArr[0];
     self.fetchResult = self.selectedAlbumInfo[@"fetchResult"];
     [self.navigationView.centernItem setTitle:self.albumsArr[0][@"title"] forState:UIControlStateNormal];
     [self updateCachedAssets];
+    [self.gridView.collectionView reloadData];
 }
 
 /**
