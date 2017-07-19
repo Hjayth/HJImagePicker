@@ -23,14 +23,14 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
 
 
-  s.source       = { :git => "git@github.com:Hjayth/HJImagePicker.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/Hjayth/HJImagePicker.git", :tag => "#{s.version}" }
 
 
 
-  s.source_files  ="HJImagePickerDemo/HJImagePicker/*.{h,m}"
+  s.source_files  ="HJImagePicker/*.{h,m}"
 
 
-  s.resource  = "HJImagePickerDemo/HJImagePicker/imagePicker.xcassets"
+  s.resource  = "HJImagePicker/imagePicker.xcassets"
   # s.resources = "Resources/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
@@ -48,6 +48,6 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency "Masonry"
+  s.dependency "Masonry", "~> 1.0.2"
 
 end
